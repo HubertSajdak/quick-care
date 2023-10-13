@@ -1,0 +1,47 @@
+{
+  "navbar": {
+    "settings": {
+      "openSettings": "open settings",
+      "logout": "logout",
+      "profile": "profile"
+    }
+  },
+  "langSwitcher": {
+    "changeLang": "language"
+  },
+  "sidebar": {
+		"start": "start",
+		"dashboard": "dashboard",
+		"stats": "stats",
+		"patients": "patients",
+		"doctors": "doctors",
+		"allPatients": "all patients",
+		"allDoctors": "all doctors",
+		"addPatient": "add patient",
+		"editPatient": "edit patient",
+		"clinics": "clinics",
+		"addClinic": "add clinic",
+		"profile": "profile",
+		"appointment": "appointment",
+		"makeAppointment": "make appointment",
+		"myAppointments": "my appointments",
+		"settings": "settings",
+		"options": "options",
+		"accountManagement": "account management",
+		"specializations": "specializations",
+		"mySpecializations": "my specializations",
+		"clinicAffiliation": "office"
+	},
+  "welcomePage": {
+    "welcome": "welcome"
+  },
+  "accountManagementPage": {
+    "heading": "user profile",
+    "userInfo": "user info",
+    "changePass": "change password",
+    "changeAvatar": "change avatar",
+    "uploadAvatarHelperText": "upload avatar",
+    "changePhoneNumber": "change phone number",
+    "changeAddress": "change address"
+  }
+}

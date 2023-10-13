@@ -1,0 +1,14 @@
+{
+	"clinicLabel": "clinics",
+	"addClinicLabel": "add clinic",
+	"editClinicLabel": "edit clinic",
+	"weekDay": {
+		"monday": "monday",
+		"tuesday": "tuesday",
+		"wednesday": "wednesday",
+		"thursday": "thursday",
+		"friday": "friday",
+		"saturday": "saturday",
+		"sunday": "sunday"
+	}
+}

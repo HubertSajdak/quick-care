@@ -1,0 +1,37 @@
+{
+	"addPatient": "add patient",
+	"allPatients": "all patients",
+	"patientInfo": "patient information",
+	"editPatient": "edit patient",
+	"editPatientError": "An error occured while fetching the data.",
+	"table": {
+		"tableName": "patients",
+		"tableDoctorName": "doctors",
+		"rowsPerPage": "rows per page",
+		"searchInput": "search...",
+		"selected": "selected",
+		"openFilters": "open filters",
+		"closeFilters": "close filters",
+		"delete": "delete",
+		"prevPageButton": "previous page",
+		"nextPageButton": "next page",
+		"customizeTable": "customize table"
+	},
+	"tableHeadings": {
+		"name": "name",
+		"surname": "surname",
+		"phoneNumber": "phone number",
+		"state": "state",
+		"city": "city",
+		"street": "street",
+		"postalCode": "postal code",
+		"avenue": "avenue",
+		"actions": "actions",
+		"all": "all",
+		"email": "email",
+		"photo": "photo",
+		"appointmentStatus": "status",
+		"clinicName": "clinic name",
+		"date": "date"
+	}
+}

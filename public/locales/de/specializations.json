@@ -1,0 +1,23 @@
+{
+	"specializationLabel": "spezialisierung",
+	"specializationKey": {
+		"radiology": "radiologie",
+		"allergology": "allergologie",
+		"surgery": "chirurgie",
+		"dermatology": "dermatologie",
+		"endocrinology": "endokrinologie",
+		"gynecology": "gynäkologie",
+		"dietetics": "diätetik",
+		"gastroenterology": "gastroenterologie",
+		"cardiology": "kardiologie",
+		"laryngology": "laryngologie",
+		"ophthalmology": "ophthalmologie",
+		"neurology": "neurologie",
+		"oncology": "onkologie",
+		"orthopedics": "orthopädie",
+		"pediatrics": "pädiatrie",
+		"dentistry": "zahnmedizin",
+		"pulmonology": "lungenheilkunde",
+		"urology": "urologie"
+	}
+}

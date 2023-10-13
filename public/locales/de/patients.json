@@ -1,0 +1,37 @@
+{
+	"addPatient": "patient hinzufügen",
+	"allPatients": "alle patienten",
+	"patientInfo": "patienteninformationen",
+	"editPatient": "patient bearbeiten",
+	"editPatientError": "Beim Abrufen der Daten ist ein Fehler aufgetreten.",
+	"table": {
+		"tableName": "patienten",
+		"tableDoctorName":"arzte",
+		"rowsPerPage": "zeilen pro seite",
+		"searchInput": "suche...",
+		"selected": "ausgewählt",
+		"openFilters": "offene filter",
+		"closeFilters": "filter schließen",
+		"delete": "löschen",
+		"prevPageButton": "vorherige seite",
+		"nextPageButton": "nächste seite",
+		"customizeTable": "tabelle anpassen"
+	},
+	"tableHeadings": {
+		"name": "name",
+		"surname": "nachname",
+		"phoneNumber": "rufnummer",
+		"state": "staat",
+		"city": "stadt",
+		"street": "straße",
+		"postalCode": "postleitzahl",
+		"avenue": "allee",
+		"actions": "aktionen",
+		"all": "alle",
+		"email": "email",
+		"photo": "foto",
+		"appointmentStatus": "status",
+		"clinicName":"klinikname",
+		"date":"daten"
+	}
+}

@@ -1,0 +1,39 @@
+{
+	"addPatient": "dodaj pacjenta",
+	"allPatients": "wszyscy pacjenci",
+	"patientInfo": "informacje pacjenta",
+	"editPatient": "edycja pacjenta",
+	"editPatientError": "Wystąpił błąd podczas pobierania danych.",
+
+	"table": {
+		"tableName": "pacjenci",
+		"tableDoctorName": "lekarze",
+		"rowsPerPage": "wierszy na stronę",
+		"searchInput": "wyszukaj...",
+		"selected": "wybrano",
+		"openFilters": "otwórz filtry",
+		"closeFilters": "zamknij filtry",
+		"delete": "usuń",
+		"prevPageButton": "poprzednia strona",
+		"nextPageButton": "następna strona",
+		"customizeTable": "modyfikuj tabelę"
+	},
+
+	"tableHeadings": {
+		"name": "imię",
+		"surname": "nazwisko",
+		"phoneNumber": "telefon",
+		"state": "stan",
+		"city": "miasto",
+		"street": "ulica",
+		"postalCode": "kod pocztowy",
+		"avenue": "aleja",
+		"actions": "akcje",
+		"all": "wszystko",
+		"email": "email",
+		"photo": "zdjęcie",
+		"appointmentStatus": "status",
+		"clinicName": "nazwa kliniki",
+		"date": "data"
+	}
+}
