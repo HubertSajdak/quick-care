@@ -17,7 +17,7 @@
 		"terms": "Warunki",
 		"conditions": "i Zasady",
 		"phoneNumber": "telefon",
-		"phoneNumberError": "nieprawidłowy numer telefonu",
+		"phoneNumberError": "numer powinien zawierać od 8-14 cyfr",
 		"state": "stan",
 		"city": "miasto",
 		"avenue": "aleja",
@@ -30,7 +30,17 @@
 		"openingHour": "godzina otwarcia",
 		"closingHour": "godzina zamknięcia",
 		"from": "od",
-		"to": "do"
+		"to": "do",
+		"invalidName": "nieprawidłowe imię",
+		"invalidSurname": "nieprawidłowe nazwisko",
+		"invalidPassword": "minimum osiem znaków, co najmniej jedna wielka litera, jedna mała litera, jedna cyfra i jeden znak specjalny",
+		"invalidPostalCode": "nieprawidłowy kod pocztowy",
+		"emailHelperText": "przykładowo: test@test.com",
+		"passwordHelperText": "minimum osiem znaków, co najmniej jedna wielka litera, jedna mała litera, jedna cyfra i jeden znak specjalny",
+		"phoneNumberHelperText": "przykładowo: 123456789",
+		"streetHelperText":"przykładowo: Szczęśliwicka 1",
+		"cityHelperText":"przykładowo: Warszawa",
+		"postalCodeHelperText":"przykładowo: 00-001"
 	},
 	"fileInput": {
 		"addFiles": "dodaj pliki",

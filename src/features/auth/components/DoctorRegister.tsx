@@ -1,14 +1,13 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import Button from "components/Button/Button";
 import CheckboxFormik from "components/CheckboxFormik/CheckboxFormik";
 import PasswordFieldFormik from "components/PasswordFieldFormik/PasswordFieldFormik";
 import TextFieldFormik from "components/TextFieldFormik/TextFieldFormik";
-import { FormikContextType, FormikProvider } from "formik";
-import { t } from "i18next";
-import { Link } from "react-router-dom";
-import RegisterImg from "images/register.svg";
 import pdf from "documents/Terms.pdf";
-import Button from "components/Button/Button";
+import { FormikContextType, FormikProvider } from "formik";
+import RegisterImg from "images/register.svg";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export interface DoctorRegisterProps<T> {
 	/**
@@ -16,18 +15,18 @@ export interface DoctorRegisterProps<T> {
 	 */
 	formikHookName: FormikContextType<T>;
 }
-const label = (
-	<Typography>
-		{t("common:form.iAgreeOn")}{" "}
-		<a href={pdf} target="_blank" rel="noreferrer" style={{ color: "royalblue" }}>
-			{t("common:form.terms")}
-		</a>{" "}
-		{t("common:form.conditions")}
-	</Typography>
-);
+
 const DoctorRegister = <T,>({ formikHookName }: DoctorRegisterProps<T>) => {
 	const { t } = useTranslation(["common", "registerPage"]);
-
+	const label = (
+		<Typography>
+			{t("common:form.iAgreeOn")}{" "}
+			<a href={pdf} target="_blank" rel="noreferrer" style={{ color: "royalblue" }}>
+				{t("common:form.terms")}{" "}
+			</a>
+			{t("common:form.conditions")}
+		</Typography>
+	);
 	return (
 		<Box display={"flex"}>
 			<Box minWidth={350} maxWidth={350} padding={2} display={{ xs: "none", md: "block" }}>
@@ -47,10 +46,20 @@ const DoctorRegister = <T,>({ formikHookName }: DoctorRegisterProps<T>) => {
 								<TextFieldFormik id="surname" label={t("common:form.surname")} name="surname" />
 							</Grid>
 							<Grid item xs={12} sm={12} md={12} minHeight="100px">
-								<TextFieldFormik id="email" label={t("common:form.email")} name="email" />
+								<TextFieldFormik
+									id="email"
+									label={t("common:form.email")}
+									name="email"
+									helperText={t("common:form.emailHelperText")}
+								/>
 							</Grid>
 							<Grid item xs={12} sm={12} md={12} minHeight="100px">
-								<PasswordFieldFormik id="password" label={t("common:form.password")} name="password" />
+								<PasswordFieldFormik
+									id="password"
+									label={t("common:form.password")}
+									name="password"
+									helperText={t("common:form.passwordHelperText")}
+								/>
 							</Grid>
 							<Grid item xs={12} sm={12} md={12} minHeight="100px">
 								<PasswordFieldFormik
