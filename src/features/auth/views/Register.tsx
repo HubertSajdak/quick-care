@@ -1,25 +1,23 @@
-import BasePageLayout from "layouts/BasePageLayout/BasePageLayout";
-import { ReactComponent as Logo } from "images/logo.svg";
-import { Box, Grid, Typography } from "@mui/material";
-import TextFieldFormik from "components/TextFieldFormik/TextFieldFormik";
-import PasswordFieldFormik from "components/PasswordFieldFormik/PasswordFieldFormik";
-import { useFormik, FormikProvider } from "formik";
-import RegisterImg from "images/register.svg";
-import { useTranslation } from "react-i18next";
-import * as Yup from "yup";
-import { useYupTranslation } from "common/useYupTranslation";
+import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { Link, useLocation, Navigate, useNavigate } from "react-router-dom";
-import { getRefreshTokenFromLocalStorage, getTokenFromLocalStorage } from "utils/localStorage/localStorage";
-import { useEffect, useState } from "react";
+import { useYupTranslation } from "common/useYupTranslation";
+import { useFormik } from "formik";
+import { ReactComponent as Logo } from "images/logo.svg";
+import BasePageLayout from "layouts/BasePageLayout/BasePageLayout";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { decodeToken } from "react-jwt";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { getRefreshTokenFromLocalStorage, getTokenFromLocalStorage } from "utils/localStorage/localStorage";
+import * as Yup from "yup";
 
 import useDocumentTitle from "common/useDocumentTitle";
-import DoctorRegister from "../components/DoctorRegister";
 import Tabs from "components/Tabs/Tabs";
-import PatientRegister from "../components/PatientRegister";
-import { authActions, registerDoctor, registerPatient } from "../authSlice";
 import { DecodedToken } from "routes/PrivateRoute";
+import { ValidationRegex } from "utils/regex/regex";
+import { authActions, registerDoctor, registerPatient } from "../authSlice";
+import DoctorRegister from "../components/DoctorRegister";
+import PatientRegister from "../components/PatientRegister";
 const Register = () => {
 	useYupTranslation();
 	const { t } = useTranslation(["common", "registerPage"]);
@@ -39,30 +37,44 @@ const Register = () => {
 			dispatch(authActions.resetRegistrationState());
 		}
 	}, [dispatch, isRegistrationSuccessful, navigate]);
-	const PHONE_NUM_REGEX = /^[0-9\- ]{8,14}$/;
 
 	const registerPatientValidation = Yup.object({
-		name: Yup.string().required(),
-		surname: Yup.string().required(),
-		phoneNumber: Yup.string().matches(PHONE_NUM_REGEX, t("common:form.phoneNumberError")).required(),
-		password: Yup.string().required().min(8),
+		name: Yup.string().matches(ValidationRegex.NAME, t("common:form.invalidName")).required().min(2),
+		surname: Yup.string().matches(ValidationRegex.SURNAME, t("common:form.invalidSurname")).required().min(2),
+		email: Yup.string().email().required(),
+		phoneNumber: Yup.string().matches(ValidationRegex.PHONE_NUMBER, t("common:form.phoneNumberError")).required(),
+		password: Yup.string().matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword")).required().min(8),
 		confirmPassword: Yup.string()
 			.required()
+			.matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword"))
 			.oneOf([Yup.ref("password"), null]),
 		address: Yup.object({
 			street: Yup.string().required(),
 			city: Yup.string().required(),
-			postalCode: Yup.string().required(),
+			postalCode: Yup.string()
+				.matches(ValidationRegex.POSTAL_CODE, t("common:form.invalidPostalCode"))
+				.required()
+				.max(6),
 		}),
 		termsAndConditions: Yup.boolean().oneOf([true], t("common:form.termsAndConditionsError")),
 	});
 	const registerDoctorValidation = Yup.object({
-		name: Yup.string().min(2).required(),
-		surname: Yup.string().min(2).required(),
+		name: Yup.string()
+			.matches(ValidationRegex.NAME, t("common:form.invalidName"))
+			.required()
+			.min(2),
+		surname: Yup.string()
+			.matches(ValidationRegex.SURNAME, t("common:form.invalidSurname"))
+			.required()
+			.min(2),
 		email: Yup.string().email().required(),
-		password: Yup.string().required().min(8),
+		password: Yup.string()
+			.matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword"))
+			.required()
+			.min(8),
 		confirmPassword: Yup.string()
 			.required()
+			.matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword"))
 			.oneOf([Yup.ref("password"), null]),
 		termsAndConditions: Yup.boolean().oneOf([true], t("common:form.termsAndConditionsError")),
 	});

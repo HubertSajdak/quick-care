@@ -17,7 +17,7 @@
 		"terms": "Bedingungen",
 		"conditions": "und Konditionen",
 		"phoneNumber": "telefonnummer",
-		"phoneNumberError": "ungültige rufnummer",
+		"phoneNumberError": "die Nummer sollte zwischen 8 und 14 Ziffern enthalten",
 		"state": "staat",
 		"city": "stadt",
 		"avenue": "allee",
@@ -30,7 +30,17 @@
 		"openingHour": "Öffnungsstunde",
 		"closingHour": "sperrstunde",
 		"from": "von",
-		"to": "bis"
+		"to": "bis",
+		"invalidName": "falscher name",
+		"invalidSurname": "falscher name",
+		"invalidPassword": "mindestens acht Zeichen, mindestens ein Großbuchstabe, ein Kleinbuchstabe, eine Zahl und ein Sonderzeichen",
+		"invalidPostalCode": "ungültige Postleitzahl",
+		"emailHelperText": "beispiel: test@test.com",
+		"passwordHelperText": "minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+		"phoneNumberHelperText": "beispiel: 123456789",
+		"streetHelperText": "beispiel: Szczęśliwicka 1",
+		"cityHelperText": "beispiel: Warszawa",
+		"postalCodeHelperText": "beispiel: 00-001"
 	},
 	"fileInput": {
 		"addFiles": "dateien hinzufügen",
