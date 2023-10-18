@@ -1,11 +1,11 @@
 import CancelIcon from "@mui/icons-material/Cancel";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import { Box } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import useDocumentTitle from "common/useDocumentTitle";
-import LineChart from "components/LineChart/LineChart";
+import ColumnChart from "components/ColumnChart/ColumnChart";
 import { appointmentsActions, getUserAppointments } from "features/appointments/appointmentsSlice";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
 import moment from "moment";
@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { mapMonthsToNumbers } from "utils/date/date";
+import { capitalizeFirstLetter } from "utils/strings/string";
 import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import InfoCard from "./components/InfoCard/InfoCard";
 const breadcrumbs: BreadcrumbsProps[] = [
@@ -36,7 +37,6 @@ const Welcome = () => {
 		dispatch(appointmentsActions.changeRowsPerPage(200));
 		dispatch(getUserAppointments());
 		dispatch(appointmentsActions.changeRowsPerPage(5));
-
 	}, [dispatch]);
 
 	const calculatedMonthlyVisits = userAppointments?.filter(appointment => {
@@ -119,27 +119,90 @@ const Welcome = () => {
 		}
 		return visitsForEachMonth;
 	};
-	const dataSets = [
-		{
-			label: "All visits",
-			data: calculateYearlyNumberOfVisits(),
-			borderColor: theme.palette.primary.main,
-			backgroundColor: theme.palette.primary.main,
-		},
-		{
-			label: "Canceled visits",
-			data: calculateYearlyNumberOfCanceledVisits(),
-			borderColor: theme.palette.error.main,
-			backgroundColor: theme.palette.error.main,
-		},
-		{
-			label: "Completed visits",
-			data: calculateYearlyNumberOfCompletedVisits(),
-			borderColor: theme.palette.success.main,
-			backgroundColor: theme.palette.success.main,
-		},
-	];
 
+	const columnChartOptions = {
+		chart: {
+			type: "bar",
+			height: 430,
+			toolbar: {
+				show: false,
+			},
+		},
+		plotOptions: {
+			bar: {
+				columnWidth: "50%",
+				borderRadius: 4,
+			},
+		},
+		dataLabels: {
+			enabled: false,
+		},
+		stroke: {
+			show: true,
+			width: 8,
+			colors: ["transparent"],
+		},
+		xaxis: {
+			categories: [
+				capitalizeFirstLetter(t("months.january")),
+				capitalizeFirstLetter(t("months.february")),
+				capitalizeFirstLetter(t("months.march")),
+				capitalizeFirstLetter(t("months.april")),
+				capitalizeFirstLetter(t("months.may")),
+				capitalizeFirstLetter(t("months.june")),
+				capitalizeFirstLetter(t("months.july")),
+				capitalizeFirstLetter(t("months.august")),
+				capitalizeFirstLetter(t("months.september")),
+				capitalizeFirstLetter(t("months.october")),
+				capitalizeFirstLetter(t("months.november")),
+				capitalizeFirstLetter(t("months.december")),
+			],
+		},
+
+		fill: {
+			opacity: 1,
+		},
+		tooltip: {
+			y: {
+				formatter(val: number) {
+					return `${val} visits`;
+				},
+			},
+		},
+
+		legend: {
+			show: true,
+			fontFamily: `'Public Sans', sans-serif`,
+			offsetX: 10,
+			offsetY: 10,
+			position: "top",
+			horizontalAlign: "right",
+			labels: {
+				useSeriesColors: false,
+			},
+			markers: {
+				width: 16,
+				height: 16,
+				radius: "50%",
+				offsexX: 2,
+				offsexY: 2,
+			},
+			itemMargin: {
+				horizontal: 15,
+				vertical: 50,
+			},
+		},
+		responsive: [
+			{
+				breakpoint: 600,
+				options: {
+					yaxis: {
+						show: false,
+					},
+				},
+			},
+		],
+	};
 	return (
 		<DashboardLayoutWrapper breadcrumbs={breadcrumbs}>
 			<Typography
@@ -152,31 +215,60 @@ const Welcome = () => {
 				{t(`welcomePage.welcome`)}
 				{` ${name} ${surname}`}
 			</Typography>
-			<Box display="flex" flexWrap="wrap" gap={2} justifyContent="space-around">
-				<InfoCard
-					title={"All visits this month"}
-					number={calculatedMonthlyVisits?.length || 0}
-					cardNumber={1}
-					icon={<LocalHospitalIcon sx={{ color: "primary.contrastText", fontSize: "60px" }} />}
-				/>
-				<InfoCard
-					title={"Canceled visits this month"}
-					number={calculatedMonthlyCanceledVisits?.length || 0}
-					cardNumber={2}
-					backgroundColor="error.light"
-					icon={<CancelIcon sx={{ color: "primary.contrastText", fontSize: "60px" }} />}
-				/>
-				<InfoCard
-					title={"Completed visits this month"}
-					number={calculatedMonthlyCompletedVisits?.length || 0}
-					cardNumber={3}
-					backgroundColor="success.light"
-					icon={<LibraryAddCheckIcon sx={{ color: "primary.contrastText", fontSize: "60px" }} />}
-				/>
-			</Box>
-			<Box display="flex" justifyContent="center" margin={4}>
-				<LineChart dataSet={dataSets} />
-			</Box>
+			{/* <Box display="flex" flexWrap="wrap" gap={2} justifyContent="space-around"> */}
+			<Grid container xs={12} rowSpacing={4.5} columnSpacing={2.75}>
+				<Grid item xs={12} sm={6} md={4} lg={3}>
+					<InfoCard
+						title={"All visits (month)"}
+						number={calculatedMonthlyVisits?.length || 0}
+						icon={<LocalHospitalIcon sx={{ color: "primary.main", fontSize: "60px" }} />}
+						description="Click here to see more info"
+					/>
+				</Grid>
+				<Grid item xs={12} sm={6} md={4} lg={3}>
+					<InfoCard
+						title={"Canceled visits (month)"}
+						number={calculatedMonthlyCanceledVisits?.length || 0}
+						icon={<CancelIcon sx={{ color: "warning.light", fontSize: "60px" }} />}
+						description="Click here to see more info"
+					/>
+				</Grid>
+				<Grid item xs={12} sm={6} md={4} lg={3}>
+					<InfoCard
+						title={"Completed visits (month)"}
+						number={calculatedMonthlyCompletedVisits?.length || 0}
+						description="Click here to see more info"
+						icon={<LibraryAddCheckIcon sx={{ color: "success.main", fontSize: "60px" }} />}
+					/>
+				</Grid>
+			</Grid>
+			<Grid container xs={12} rowSpacing={4.5} columnSpacing={2.75} marginTop={2}>
+				<Grid item xs={12}>
+					<Stack spacing={1.5} sx={{ backgroundColor: "white", boxShadow: theme.shadows[2], borderRadius: 2 }}>
+						<ColumnChart
+							series={[
+								{
+									name: "All visits",
+									data: calculateYearlyNumberOfVisits(),
+									color: theme.palette.primary.main,
+								},
+								{
+									name: "Canceled visits",
+									data: calculateYearlyNumberOfCanceledVisits(),
+									color: theme.palette.warning.main,
+								},
+								{
+									name: "Completed visits",
+									data: calculateYearlyNumberOfCompletedVisits(),
+									color: theme.palette.success.main,
+								},
+							]}
+							options={columnChartOptions}
+							title="Monthly Visits"
+						/>
+					</Stack>
+				</Grid>
+			</Grid>
 		</DashboardLayoutWrapper>
 	);
 };

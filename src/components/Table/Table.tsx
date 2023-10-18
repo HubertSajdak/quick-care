@@ -1,5 +1,6 @@
 import CloseIcon from "@mui/icons-material/Close";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import {
 	Box,
 	IconButton,
@@ -19,10 +20,8 @@ import {
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 import Rows from "./components/Rows";
 import RowsCollapsible from "./components/RowsCollapsible";
-
 export interface ColumnsValue<T> {
 	/**
 	 * Title of displayed column heading.
@@ -188,16 +187,9 @@ export interface TableProps<T> {
 	renderSelectedItemsOptions?: (selectedRows: T[]) => React.ReactNode;
 	collapsible?: boolean;
 	innerTableTitle?: string;
+	refreshTableContent?: () => void;
 }
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-	"&:nth-of-type(odd)": {
-		backgroundColor: theme.palette.action.hover,
-	},
-	// hide last border
-	"&:last-child td, &:last-child th": {
-		border: 0,
-	},
-}));
+
 const Table = <T extends { _id: string }>({
 	isLoading,
 	isSelectable,
@@ -214,6 +206,7 @@ const Table = <T extends { _id: string }>({
 	onChangeRowsPerPage,
 	onChangeSort,
 	renderSelectedItemsOptions,
+	refreshTableContent,
 }: TableProps<T>) => {
 	const { t } = useTranslation();
 	const [selectedCheckboxes, setSelectedCheckboxes] = useState<T[]>([]);
@@ -246,9 +239,9 @@ const Table = <T extends { _id: string }>({
 		}
 	};
 	return (
-		<Box width="100%" position="relative">
+		<Box width="100%" maxWidth="100%" position="relative" sx={{ overflowX: "auto" }}>
 			{isLoading && <LoadingSpinner />}
-			<Paper sx={{ boxShadow: "5", width: "100%", mb: 2 }}>
+			<Paper sx={{ boxShadow: "5", width: "100%", maxWidth: "100%", mb: 2, overflowX: "auto" }}>
 				<Toolbar sx={{ pl: { sm: 2 }, pr: { xs: 1, sm: 1 } }}>
 					{selectedCheckboxes.length > 0 ? (
 						<Typography sx={{ flex: "1 1 100%" }} color="inherit" variant="subtitle1" component="div">
@@ -279,12 +272,22 @@ const Table = <T extends { _id: string }>({
 							</IconButton>
 						</Tooltip>
 					)}
+					{refreshTableContent ? (
+						<Tooltip title={t("patients:table.refreshTable")}>
+							<IconButton onClick={refreshTableContent}>
+								<RefreshIcon />
+							</IconButton>
+						</Tooltip>
+					) : null}
+					{/* <Button startIcon={<RefreshIcon />} onAsyncClick={fetchDoctorsData} sx={{ margin: "0 0 0 16px" }}>
+						{t("buttons:refresh")}
+					</Button> */}
 					{selectedCheckboxes.length > 0 &&
 						renderSelectedItemsOptions &&
 						renderSelectedItemsOptions(selectedCheckboxes)}
 				</Toolbar>
-				<TableContainer sx={{ overflowX: "auto" }}>
-					<MuiTable>
+				<TableContainer sx={{ overflowX: "auto", width: "100%", maxWidth: "100%", display: "block" }}>
+					<MuiTable stickyHeader sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}>
 						<TableHead>
 							<TableRow>
 								<>
@@ -304,12 +307,12 @@ const Table = <T extends { _id: string }>({
 											<TableCell component="th" align="left" key={column.key}>
 												<TableSortLabel
 													active={sort.sortBy === column.key}
-													direction={sort.sortDirection === "asc" ? "desc" : "asc"}
+													direction={sort.sortDirection === "asc" ? "asc" : "desc"}
 													onClick={() => {
 														onChangeSort(
 															column.key,
 															sort.sortBy !== column.key
-																? "desc"
+																? "asc"
 																: sort.sortBy === column.key && sort.sortDirection === "desc"
 																? "asc"
 																: "desc"

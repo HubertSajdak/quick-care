@@ -1,14 +1,9 @@
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import BookIcon from "@mui/icons-material/Book";
-import DeleteIcon from "@mui/icons-material/Delete";
 import PersonIcon from "@mui/icons-material/Person";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import { Box, IconButton, TextField, Typography } from "@mui/material";
+import { Box, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import useDocumentTitle from "common/useDocumentTitle";
-import Button from "components/Button/Button";
 import CheckboxSelect from "components/CheckboxSelect/CheckboxSelect";
-import Modal from "components/Modal/Modal";
 import NotFoundContent from "components/NotFoundContent/NotFoundContent";
 import Table from "components/Table/Table";
 import { getAllSpecializations } from "features/specializations/specializationsSlice";
@@ -30,8 +25,8 @@ const breadcrumbs: BreadcrumbsProps[] = [
 	},
 ];
 const AllDoctors = () => {
-	const { t } = useTranslation(["patients", "doctors.allDoctors", "modal"]);
-	useDocumentTitle(t("allDoctors.allDoctors"));
+	const { t } = useTranslation(["patients", "doctors", "modal", "translation"]);
+	useDocumentTitle(t("translation:sidebar.allDoctors"));
 
 	const dispatch = useAppDispatch();
 	const {
@@ -128,151 +123,120 @@ const AllDoctors = () => {
 	return (
 		<DashboardLayoutWrapper breadcrumbs={breadcrumbs}>
 			<Typography component="h1" variant="h4" textAlign="center" textTransform={"capitalize"} marginBottom={2}>
-				{t("allDoctors")}
+				{t("translation:sidebar.allDoctors")}
 			</Typography>
-			<Box
-				width="100%"
-				boxShadow="3"
-				padding="1rem"
-				maxWidth={{ lg: "lg", md: "850px", sm: "530px", xs: "300px" }}
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					alignitems: "center",
-					backgroundColor: "white",
-					borderTop: 5,
-					borderColor: "primary.main",
-					borderRadius: "8px 8px 0 0",
-					margin: "0 auto",
-				}}>
-				{isError ? (
-					<NotFoundContent returnPath="/" />
-				) : (
-					<>
-						<Table
-							filter={
-								<Box display="flex" flexDirection={{ xs: "column", sm: "column", md: "row" }}>
-									<div style={{ margin: "1rem" }}>
-										<CheckboxSelect
-											size="small"
-											optionsList={specializationOptions}
-											checkedList={selectedSpecOptions}
-											value={selectedSpecOptions}
-											onSelected={selectHandler}
-											renderValue={() => selectedSpecOptions.map(el => el.label).join(", ")}
-											sx={{ width: 200 }}
-											label="specializations"
-										/>
-									</div>
-									<div style={{ margin: "1rem" }}>
-										<TextField
-											placeholder={t("patients:table.searchInput")}
-											defaultValue={search || ""}
-											onChange={e => debouncedOnChangeSearch(e.target.value)}
-											size="small"
-											sx={{ width: 200 }}
-											type="search"
-										/>
-									</div>
-								</Box>
-							}
-							onChangePage={changePageHandler}
-							onChangeSort={changeSortHandler}
-							onChangeRowsPerPage={changeRowsPerPageHandler}
-							pagination={{
-								currentPage: currentPage,
-								pageSize: pageSize,
-								totalItems: totalItems,
-							}}
-							sort={{ sortBy: sortBy, sortDirection: sortDirection }}
-							isSelectable={true}
-							isLoading={isLoading}
-							tableName={t("table.tableDoctorName")}
-							innerTableTitle="More info"
-							data={data || []}
-							collapsible
-							columns={[
-								{
-									title: t("tableHeadings.photo"),
-									key: "photo",
-									render: row => row.photo,
-									sortable: false,
-								},
-								{
-									title: t("tableHeadings.name"),
-									key: "name",
-									render: row => row.name,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.surname"),
-									key: "surname",
-									render: row => row.surname,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.email"),
-									key: "email",
-									render: row => row.email,
-									sortable: true,
-								},
-
-								{
-									title: t("tableHeadings.actions"),
-									key: "actions",
-									render: row => (
-										<Box display="flex">
-											<IconButton component={Link} to={`/addAppointment/${row._id}`}>
-												<BookIcon color="info" />
-											</IconButton>
-											<IconButton component={Link} to={`/allDoctors/singleDoctor/${row._id}`}>
-												<PersonIcon color="info" />
-											</IconButton>
-											<Modal
-												title={t("modal:deletePatient.title")}
-												text={t("modal:deletePatient.text")}
-												openModalBtnColor="warning"
-												openModalBtnText={<DeleteIcon />}
-												isOpenModalIconBtn={true}
-												acceptBtnColor="error"
-												rejectBtnVariant="contained"
-												onAsyncClick={function (): Promise<void> {
-													throw new Error("Function not implemented.");
-												}}
+			<Grid container xs={12}>
+				<Grid item xs={12}>
+					{isError ? (
+						<NotFoundContent returnPath="/" />
+					) : (
+						<>
+							<Table
+								filter={
+									<Box display="flex" flexDirection={{ xs: "column", sm: "column", md: "row" }}>
+										<div style={{ margin: "1rem" }}>
+											<CheckboxSelect
+												size="small"
+												optionsList={specializationOptions}
+												checkedList={selectedSpecOptions}
+												value={selectedSpecOptions}
+												onSelected={selectHandler}
+												renderValue={() => selectedSpecOptions.map(el => el.label).join(", ")}
+												sx={{ width: 200 }}
+												label="specializations"
 											/>
-										</Box>
-									),
-									sortable: false,
-								},
-							]}
-							innerColumns={[
-								{
-									title: "specializations",
-									key: "specialization",
-									render: row =>
-										row.DoctorSpecialization?.map((spec, idx, arr) => {
-											if (idx + 1 === arr.length) {
-												return `${spec.Specialization?.specializationKey}`;
-											}
-											return `${spec.Specialization?.specializationKey}, `;
-										}),
-									sortable: false,
-								},
-							]}
-						/>
+										</div>
+										<div style={{ margin: "1rem" }}>
+											<TextField
+												placeholder={t("patients:table.searchInput")}
+												defaultValue={search || ""}
+												onChange={e => debouncedOnChangeSearch(e.target.value)}
+												size="small"
+												sx={{ width: 200 }}
+												type="search"
+											/>
+										</div>
+									</Box>
+								}
+								refreshTableContent={fetchDoctorsData}
+								onChangePage={changePageHandler}
+								onChangeSort={changeSortHandler}
+								onChangeRowsPerPage={changeRowsPerPageHandler}
+								pagination={{
+									currentPage: currentPage,
+									pageSize: pageSize,
+									totalItems: totalItems,
+								}}
+								sort={{ sortBy: sortBy, sortDirection: sortDirection }}
+								isSelectable={true}
+								isLoading={isLoading}
+								tableName={t("table.tableDoctorName")}
+								innerTableTitle="More info"
+								data={data || []}
+								collapsible
+								columns={[
+									{
+										title: t("tableHeadings.photo"),
+										key: "photo",
+										render: row => row.photo,
+										sortable: false,
+									},
+									{
+										title: t("tableHeadings.name"),
+										key: "name",
+										render: row => row.name,
+										sortable: true,
+									},
+									{
+										title: t("tableHeadings.surname"),
+										key: "surname",
+										render: row => row.surname,
+										sortable: true,
+									},
+									{
+										title: t("tableHeadings.email"),
+										key: "email",
+										render: row => row.email,
+										sortable: true,
+									},
 
-						<div style={{ display: "flex" }}>
-							{/* @ts-ignore */}
-							<Button component={Link} to={"/addPatient"} startIcon={<AddCircleOutlineIcon />}>
-								{t("buttons:add")}
-							</Button>
-							<Button startIcon={<RefreshIcon />} onAsyncClick={fetchDoctorsData} sx={{ margin: "0 0 0 16px" }}>
-								{t("buttons:refresh")}
-							</Button>
-						</div>
-					</>
-				)}
-			</Box>
+									{
+										title: t("tableHeadings.actions"),
+										key: "actions",
+										render: row => (
+											<Box display="flex">
+												<IconButton component={Link} to={`/addAppointment/${row._id}`}>
+													<BookIcon color="info" />
+												</IconButton>
+												<IconButton component={Link} to={`/allDoctors/singleDoctor/${row._id}`}>
+													<PersonIcon color="info" />
+												</IconButton>
+											</Box>
+										),
+										sortable: false,
+									},
+								]}
+								innerColumns={[
+									{
+										title: "specializations",
+										key: "specialization",
+										render: row =>
+											row.DoctorSpecialization?.map((spec, idx, arr) => {
+												if (idx + 1 === arr.length) {
+													return `${spec.Specialization?.specializationKey}`;
+												}
+												return `${spec.Specialization?.specializationKey}, `;
+											}),
+										sortable: false,
+									},
+								]}
+							/>
+
+							<div style={{ display: "flex" }}>{/* @ts-ignore */}</div>
+						</>
+					)}
+				</Grid>
+			</Grid>
 		</DashboardLayoutWrapper>
 	);
 };

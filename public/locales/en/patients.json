@@ -15,7 +15,8 @@
 		"delete": "delete",
 		"prevPageButton": "previous page",
 		"nextPageButton": "next page",
-		"customizeTable": "customize table"
+		"customizeTable": "customize table",
+		"refreshTable": "refresh table"
 	},
 	"tableHeadings": {
 		"name": "name",

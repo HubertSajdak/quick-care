@@ -16,7 +16,8 @@
 		"delete": "usuń",
 		"prevPageButton": "poprzednia strona",
 		"nextPageButton": "następna strona",
-		"customizeTable": "modyfikuj tabelę"
+		"customizeTable": "modyfikuj tabelę",
+		"refreshTable":"odśwież tabelę"
 	},
 
 	"tableHeadings": {

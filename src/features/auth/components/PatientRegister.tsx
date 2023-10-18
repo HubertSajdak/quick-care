@@ -61,7 +61,6 @@ const PatientRegister = <T,>({ formikHookName }: DoctorRegisterProps<T>) => {
 									id="password"
 									label={t("common:form.password")}
 									name="password"
-									helperText={t("common:form.passwordHelperText")}
 								/>
 							</Grid>
 							<Grid item xs={12} sm={12} md={12} minHeight="100px">

@@ -15,7 +15,8 @@
 		"delete": "löschen",
 		"prevPageButton": "vorherige seite",
 		"nextPageButton": "nächste seite",
-		"customizeTable": "tabelle anpassen"
+		"customizeTable": "tabelle anpassen",
+		"refreshTable":"die tabelle aktualisieren"
 	},
 	"tableHeadings": {
 		"name": "name",
