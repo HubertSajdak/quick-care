@@ -1,3 +1,4 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
 	Accordion,
 	AccordionDetails,
@@ -72,7 +73,7 @@ const BasicCard = ({
 				</Box>
 				{listItemsArray ? (
 					<Accordion>
-						<AccordionSummary>{listItemsArrayTitle}</AccordionSummary>
+						<AccordionSummary expandIcon={<ExpandMoreIcon />}>{listItemsArrayTitle}</AccordionSummary>
 						<AccordionDetails>
 							<List listItemsArray={listItemsArray} />
 						</AccordionDetails>

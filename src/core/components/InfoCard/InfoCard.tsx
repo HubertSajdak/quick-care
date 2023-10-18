@@ -1,33 +1,45 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, Grid, Stack, Typography } from "@mui/material";
+import { useTheme } from "styled-components";
 const InfoCard = ({
-	backgroundColor = "primary.main",
+	backgroundColor = "common.white",
 	title,
 	number,
-	cardNumber,
+	description,
 	icon,
 }: {
 	backgroundColor?: string;
 	title: string;
 	number: number;
-	cardNumber: number;
+	description: string;
 	icon: React.ReactNode;
 }) => {
+	const theme = useTheme();
 	return (
-		<Card sx={{ width: "280px", backgroundColor: backgroundColor }}>
-			<CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
-				<Typography sx={{ fontSize: 14 }} color="primary.contrastText" gutterBottom>
-					{cardNumber}
-				</Typography>
-				<Typography variant="h5" component="div" color="primary.contrastText" gutterBottom textAlign="center">
+		<Card
+			sx={{
+				backgroundColor: backgroundColor,
+				padding: "18px",
+			}}>
+			<Stack spacing={0.5}>
+				<Typography variant="h6" color={theme.palette.grey[600]}>
 					{title}
 				</Typography>
-				<Box display="flex" justifyContent="space-around" alignItems="center">
-					{icon}
-					<Typography variant="h2" textAlign="center" color="primary.contrastText" sx={{ fontWeight: "bold" }}>
-						{number}
-					</Typography>
-				</Box>
-			</CardContent>
+				<Grid container alignItems="center" columnGap={2}>
+					<Grid itemScope>
+						<Box display="flex" justifyContent="space-around" alignItems="center">
+							{icon}
+						</Box>
+					</Grid>
+					<Grid item>
+						<Typography variant="h3" textAlign="center" sx={{ fontWeight: "bold" }}>
+							{number}
+						</Typography>
+					</Grid>
+				</Grid>
+				<Typography variant="subtitle2" color={theme.palette.grey[500]}>
+					{description}
+				</Typography>
+			</Stack>
 		</Card>
 	);
 };

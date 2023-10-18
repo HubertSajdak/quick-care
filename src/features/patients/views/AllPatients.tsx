@@ -1,17 +1,13 @@
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import DeleteIcon from "@mui/icons-material/Delete";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { Box, TextField, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import useDocumentTitle from "common/useDocumentTitle";
 import Button from "components/Button/Button";
-import Modal from "components/Modal/Modal";
 import NotFoundContent from "components/NotFoundContent/NotFoundContent";
 import Table from "components/Table/Table";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
 import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import { getAllPatients, patientsActions } from "../patientsSlice";
@@ -108,6 +104,12 @@ const AllPatients = () => {
 							data={data || []}
 							columns={[
 								{
+									title: t("tableHeadings.photo"),
+									key: "photo",
+									render: row => row.photo,
+									sortable: false,
+								},
+								{
 									title: t("tableHeadings.name"),
 									key: "name",
 									render: row => row.name,
@@ -151,38 +153,31 @@ const AllPatients = () => {
 									sortable: true,
 								},
 
-								{
-									title: t("tableHeadings.actions"),
-									key: "actions",
-									render: row => (
-										<Box display="flex">
-											{/* <IconButton component={Link} to={`/allPatients/editPatient/${row._id}`}>
-												<EditIcon color="info" />
-											</IconButton> */}
-											<Modal
-												title={t("modal:deletePatient.title")}
-												text={t("modal:deletePatient.text")}
-												openModalBtnColor="warning"
-												openModalBtnText={<DeleteIcon />}
-												isOpenModalIconBtn={true}
-												acceptBtnColor="error"
-												rejectBtnVariant="contained"
-												onAsyncClick={function (): Promise<void> {
-													throw new Error("Function not implemented.");
-												}}
-											/>
-										</Box>
-									),
-									sortable: false,
-								},
+								// {
+								// 	title: t("tableHeadings.actions"),
+								// 	key: "actions",
+								// 	render: row => (
+								// 		<Box display="flex">
+								// 			<Modal
+								// 				title={t("modal:deletePatient.title")}
+								// 				text={t("modal:deletePatient.text")}
+								// 				openModalBtnColor="warning"
+								// 				openModalBtnText={<DeleteIcon />}
+								// 				isOpenModalIconBtn={true}
+								// 				acceptBtnColor="error"
+								// 				rejectBtnVariant="contained"
+								// 				onAsyncClick={function (): Promise<void> {
+								// 					throw new Error("Function not implemented.");
+								// 				}}
+								// 			/>
+								// 		</Box>
+								// 	),
+								// 	sortable: false,
+								// },
 							]}
 						/>
 
 						<div style={{ display: "flex" }}>
-							{/* @ts-ignore */}
-							<Button component={Link} to={"/addPatient"} startIcon={<AddCircleOutlineIcon />}>
-								{t("buttons:add")}
-							</Button>
 							<Button startIcon={<RefreshIcon />} onAsyncClick={fetchDoctorsData} sx={{ margin: "0 0 0 16px" }}>
 								{t("buttons:refresh")}
 							</Button>

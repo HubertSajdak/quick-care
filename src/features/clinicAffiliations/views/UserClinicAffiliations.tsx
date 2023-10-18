@@ -1,11 +1,12 @@
+import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import { Box, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import BasicCard from "components/BasicCard.tsx/BasicCard";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
 import { useEffect } from "react";
+import theme from "styles/theme";
 import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import { getCurrentUserClinicAffiliations } from "../clinicAffiliationsSlice";
-import { Box, Grid, Typography } from "@mui/material";
-import BasicCard from "components/BasicCard.tsx/BasicCard";
-import theme from "styles/theme";
 const breadcrumbs: BreadcrumbsProps[] = [
 	{
 		label: "dashboard",
@@ -64,6 +65,11 @@ const UserClinicAffiliations = () => {
 											buttonText="Edit Clinic Affiliation"
 											isLink={true}
 											to={`/editClinicAffiliations/${el.clinicId}`}
+											listItemsArrayTitle={
+												<Box display="flex" gap={2}>
+													<WatchLaterIcon color="info" /> <Typography>Working hours:</Typography>{" "}
+												</Box>
+											}
 										/>
 									</Grid>
 								);

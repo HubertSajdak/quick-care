@@ -39,8 +39,8 @@ const Register = () => {
 	}, [dispatch, isRegistrationSuccessful, navigate]);
 
 	const registerPatientValidation = Yup.object({
-		name: Yup.string().matches(ValidationRegex.NAME, t("common:form.invalidName")).required().min(2),
-		surname: Yup.string().matches(ValidationRegex.SURNAME, t("common:form.invalidSurname")).required().min(2),
+		name: Yup.string().required().min(2),
+		surname: Yup.string().required().min(2),
 		email: Yup.string().email().required(),
 		phoneNumber: Yup.string().matches(ValidationRegex.PHONE_NUMBER, t("common:form.phoneNumberError")).required(),
 		password: Yup.string().matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword")).required().min(8),
@@ -59,19 +59,10 @@ const Register = () => {
 		termsAndConditions: Yup.boolean().oneOf([true], t("common:form.termsAndConditionsError")),
 	});
 	const registerDoctorValidation = Yup.object({
-		name: Yup.string()
-			.matches(ValidationRegex.NAME, t("common:form.invalidName"))
-			.required()
-			.min(2),
-		surname: Yup.string()
-			.matches(ValidationRegex.SURNAME, t("common:form.invalidSurname"))
-			.required()
-			.min(2),
+		name: Yup.string().required().min(2),
+		surname: Yup.string().required().min(2),
 		email: Yup.string().email().required(),
-		password: Yup.string()
-			.matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword"))
-			.required()
-			.min(8),
+		password: Yup.string().matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword")).required().min(8),
 		confirmPassword: Yup.string()
 			.required()
 			.matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword"))

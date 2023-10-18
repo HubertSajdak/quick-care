@@ -43,5 +43,19 @@
 		"uploadAvatarHelperText": "prześlij avatar",
 		"changePhoneNumber": "zmień numer telefonu",
 		"changeAddress": "zmień adres"
+	},
+	"months":{
+		"january":"styczeń",
+		"february":"luty",
+		"march":"marzec",
+		"april":"kwiecień",
+		"may":"maj",
+		"june":"czerwiec",
+		"july":"lipiec",
+		"august":"sierpień",
+		"september":"wrzesień",
+		"october":"październik",
+		"november":"listopad",
+		"december":"grudzień"
 	}
 }

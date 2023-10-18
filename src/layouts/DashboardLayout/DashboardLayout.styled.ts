@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-	background-color: ${({ theme }) => theme.palette.grey[200]};
+	background-color: ${({ theme }) => theme.palette.grey[50]};
 	min-height: 100vh;
 	.dashboard {
 		display: grid;

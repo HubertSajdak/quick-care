@@ -1,15 +1,15 @@
 {
-  "navbar": {
-    "settings": {
-      "openSettings": "open settings",
-      "logout": "logout",
-      "profile": "profile"
-    }
-  },
-  "langSwitcher": {
-    "changeLang": "language"
-  },
-  "sidebar": {
+	"navbar": {
+		"settings": {
+			"openSettings": "open settings",
+			"logout": "logout",
+			"profile": "profile"
+		}
+	},
+	"langSwitcher": {
+		"changeLang": "language"
+	},
+	"sidebar": {
 		"start": "start",
 		"dashboard": "dashboard",
 		"stats": "stats",
@@ -32,16 +32,30 @@
 		"mySpecializations": "my specializations",
 		"clinicAffiliation": "office"
 	},
-  "welcomePage": {
-    "welcome": "welcome"
-  },
-  "accountManagementPage": {
-    "heading": "user profile",
-    "userInfo": "user info",
-    "changePass": "change password",
-    "changeAvatar": "change avatar",
-    "uploadAvatarHelperText": "upload avatar",
-    "changePhoneNumber": "change phone number",
-    "changeAddress": "change address"
-  }
+	"welcomePage": {
+		"welcome": "welcome"
+	},
+	"accountManagementPage": {
+		"heading": "user profile",
+		"userInfo": "user info",
+		"changePass": "change password",
+		"changeAvatar": "change avatar",
+		"uploadAvatarHelperText": "upload avatar",
+		"changePhoneNumber": "change phone number",
+		"changeAddress": "change address"
+	},
+	"months": {
+		"january": "january",
+		"february": "february",
+		"march": "march",
+		"april": "april",
+		"may": "may",
+		"june": "june",
+		"july": "july",
+		"august": "august",
+		"september": "september",
+		"october": "october",
+		"november": "november",
+		"december": "december"
+	}
 }

@@ -1,15 +1,15 @@
 {
-  "navbar": {
-    "settings": {
-      "openSettings": "einstellungen öffnen",
-      "logout": "abmeldung",
-      "profile": "profil"
-    }
-  },
-  "langSwitcher": {
-    "changeLang": "sprache"
-  },
-  "sidebar": {
+	"navbar": {
+		"settings": {
+			"openSettings": "einstellungen öffnen",
+			"logout": "abmeldung",
+			"profile": "profil"
+		}
+	},
+	"langSwitcher": {
+		"changeLang": "sprache"
+	},
+	"sidebar": {
 		"start": "start",
 		"dashboard": "dashboard",
 		"stats": "statistiken",
@@ -32,16 +32,30 @@
 		"mySpecializations": "meine spezialisierungen",
 		"clinicAffiliation": "büroe"
 	},
-  "welcomePage": {
-    "welcome": "willkommen"
-  },
-  "accountManagementPage": {
-    "heading": "benutzerprofil",
-    "userInfo": "benutzerinfo",
-    "changePass": "passwort ändern",
-    "changeAvatar": "avatar ändern",
-    "uploadAvatarHelperText": "avatar hochladen",
-    "changePhoneNumber": "rufnummer ändern",
-    "changeAddress": "adresse ändern"
-  }
+	"welcomePage": {
+		"welcome": "willkommen"
+	},
+	"accountManagementPage": {
+		"heading": "benutzerprofil",
+		"userInfo": "benutzerinfo",
+		"changePass": "passwort ändern",
+		"changeAvatar": "avatar ändern",
+		"uploadAvatarHelperText": "avatar hochladen",
+		"changePhoneNumber": "rufnummer ändern",
+		"changeAddress": "adresse ändern"
+	},
+	"months": {
+		"january": "januar",
+		"february": "februar",
+		"march": "märz",
+		"april": "april",
+		"may": "mai",
+		"june": "june",
+		"july": "juni",
+		"august": "august",
+		"september": "september",
+		"october": "oktober",
+		"november": "november",
+		"december": "dezember"
+	}
 }

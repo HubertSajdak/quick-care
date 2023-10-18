@@ -56,7 +56,9 @@ export interface DoctorResponse {
 					specializationKey: string;
 				};
 		  }[]
-		| [] | null | undefined
+		| []
+		| null
+		| undefined;
 }
 export interface DoctorSpecializationsResponse {
 	_id: string;
@@ -129,4 +131,6 @@ export interface AppointmentResponse {
 		clinicName: string;
 		photo: string;
 	};
+	createdAt?: Date;
+	updatedAt?: Date;
 }
