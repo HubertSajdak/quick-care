@@ -287,7 +287,16 @@ const Table = <T extends { _id: string }>({
 						renderSelectedItemsOptions(selectedCheckboxes)}
 				</Toolbar>
 				<TableContainer sx={{ overflowX: "auto", width: "100%", maxWidth: "100%", display: "block" }}>
-					<MuiTable stickyHeader sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}>
+					<MuiTable
+						stickyHeader
+						sx={{
+							overflowX: "auto",
+							width: "100%",
+							maxWidth: "100%",
+							minWidth: "500px",
+							borderCollapse: "collapse",
+							borderSpacing: 0,
+						}}>
 						<TableHead>
 							<TableRow>
 								<>

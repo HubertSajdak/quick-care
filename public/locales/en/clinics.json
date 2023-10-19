@@ -10,5 +10,25 @@
 		"friday": "friday",
 		"saturday": "saturday",
 		"sunday": "sunday"
+	},
+	"addClinicPage": {
+		"generalInfo": "general info",
+		"clinicName": "clinic name",
+		"phoneNumber": "phone number",
+		"address": "address",
+		"street": "street",
+		"city": "city",
+		"postalCode": "postal code",
+		"workingTime": "working time"
+	},
+	"editClinicAffiliationPage": {
+		"editClinicAffiliation": "edit clinic affiliation",
+		"workingTime": "working time",
+		"availability": "available",
+		"consultationFee": "consultation fee",
+		"timePerPatient": "visit duration",
+		"absenceFrom": "absence from",
+		"absenceTo": "absence to",
+		"absenceReason": "absence reason"
 	}
 }

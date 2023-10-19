@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import theme from "styles/theme";
+import { capitalizeFirstLetter } from "utils/strings/string";
 import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import * as Yup from "yup";
 import { getCurrentUserClinicAffiliations, updateClinicAffiliations } from "../clinicAffiliationsSlice";
@@ -24,7 +25,7 @@ const breadcrumbs: BreadcrumbsProps[] = [
 		to: "start",
 	},
 	{
-		label: "addClinicAffiliations",
+		label: "editClinicAffiliation",
 	},
 ];
 
@@ -105,7 +106,7 @@ const EditClinicAffiliations = () => {
 	useYupTranslation();
 	const dispatch = useAppDispatch();
 	const params = useParams();
-	const { t } = useTranslation(["clinics"]);
+	const { t } = useTranslation(["clinics", "common"]);
 	const { singleClinicData } = useAppSelector(state => state.clinics);
 	const { data } = useAppSelector(state => state.clinicAffiliations);
 	const findClinicAffiliation = data?.find(obj => obj.clinicId === params.clinicId);
@@ -257,7 +258,7 @@ const EditClinicAffiliations = () => {
 	return (
 		<DashboardLayoutWrapper breadcrumbs={breadcrumbs}>
 			<Typography component="h1" variant="h4" textAlign="center" textTransform="capitalize" marginBottom={2}>
-				Edit Clinic Affiliation
+				{capitalizeFirstLetter(t("clinics:editClinicAffiliationPage.editClinicAffiliation"))}
 			</Typography>
 			<Box
 				width="100%"
@@ -280,14 +281,18 @@ const EditClinicAffiliations = () => {
 							<Grid container columnSpacing={2} rowSpacing={1.5} width="100%">
 								<Grid item>
 									<Typography component="h2" variant="h5">
-										{singleClinicData?.clinicName} working hours:
+										{singleClinicData?.clinicName} {t("clinics:editClinicAffiliationPage.workingTime")}:
 									</Typography>
 									{singleClinicData ? (
 										<List>
 											{singleClinicData.workingTime.map(day => {
 												return (
 													<ListItem key={day.weekDay} sx={{ boxShadow: theme.shadows[1] }}>
-														<ListItemText primary={`Day: ${day.weekDay} From: ${day.startTime} To: ${day.stopTime}`} />
+														<ListItemText
+															primary={`${t(`clinics:weekDay.${day.weekDay}`)} ${t("common:form.from")}: ${
+																day.startTime
+															} ${t("common:form.to")}: ${day.stopTime}`}
+														/>
 													</ListItem>
 												);
 											})}
@@ -320,16 +325,24 @@ const EditClinicAffiliations = () => {
 									})}
 								</Grid>
 								<Grid item>
-									<SwitchFormik id="available" label="available" name="available" />
+									<SwitchFormik
+										id="available"
+										label={capitalizeFirstLetter(t("clinics:editClinicAffiliationPage.availability"))}
+										name="available"
+									/>
 								</Grid>
 								{!editClinicAffiliationFormik.values.available ? (
 									<>
 										<Grid item xs={12} sm={12} md={12}>
-											<TextFieldFormik id="reasonOfAbsence" label="reason of absence" name="reasonOfAbsence" />
+											<TextFieldFormik
+												id="reasonOfAbsence"
+												label={capitalizeFirstLetter(t("clinics:editClinicAffiliationPage.absenceReason"))}
+												name="reasonOfAbsence"
+											/>
 										</Grid>
 										<Grid item xs={12} sm={12} md={12}>
 											<Typography component="h3" variant="h6">
-												Absence From
+												{capitalizeFirstLetter(t("clinics:editClinicAffiliationPage.absenceFrom"))}
 											</Typography>
 											<DatePickerFormik
 												id="absenceFrom"
@@ -338,7 +351,7 @@ const EditClinicAffiliations = () => {
 												dateFormat="dd/MM/yyyy"
 											/>
 											<Typography component="h3" variant="h6">
-												Absence To
+												{capitalizeFirstLetter(t("clinics:editClinicAffiliationPage.absenceTo"))}
 											</Typography>
 
 											<DatePickerFormik
@@ -353,7 +366,7 @@ const EditClinicAffiliations = () => {
 								<Grid item xs={12} sm={12} md={12}>
 									<TextFieldFormik
 										id="consultationFee"
-										label="consultation fee (zł)"
+										label={capitalizeFirstLetter(t(`clinics:editClinicAffiliationPage.consultationFee`) + " (zł)")}
 										name="consultationFee"
 										type="number"
 									/>
@@ -362,7 +375,7 @@ const EditClinicAffiliations = () => {
 									<SelectFormik
 										name="timePerPatient"
 										optionsList={optionsList}
-										label="timePerPatient"
+										label={capitalizeFirstLetter(t("clinics:editClinicAffiliationPage.timePerPatient"))}
 										id="timePerPatient"
 									/>
 								</Grid>

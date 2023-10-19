@@ -4,6 +4,7 @@ import AirIcon from "@mui/icons-material/Air";
 import AirlineSeatLegroomReducedIcon from "@mui/icons-material/AirlineSeatLegroomReduced";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
 import BugReportIcon from "@mui/icons-material/BugReport";
+import CancelIcon from "@mui/icons-material/Cancel";
 import CarpenterIcon from "@mui/icons-material/Carpenter";
 import FaceIcon from "@mui/icons-material/Face";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
@@ -16,7 +17,7 @@ import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import SpaIcon from "@mui/icons-material/Spa";
 import WavesIcon from "@mui/icons-material/Waves";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, IconButton, Paper, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 const specializationMappings = [
@@ -112,7 +113,7 @@ const specializationMappings = [
 	},
 ];
 
-const SpecializationBadge = ({ specializationKey }: { specializationKey: string }) => {
+const SpecializationBadge = ({ specializationKey, onDelete }: { specializationKey: string; onDelete?: () => void }) => {
 	const { t } = useTranslation(["specializations"]);
 
 	const findSpecializationMapping = specializationMappings.find(el => el.specializationKey === specializationKey);
@@ -128,6 +129,11 @@ const SpecializationBadge = ({ specializationKey }: { specializationKey: string 
 				sx={{ textTransform: "uppercase", fontWeight: "500" }}>
 				{t(`specializations:specializationKey.${findSpecializationMapping?.specializationKey}`)}
 			</Typography>
+			{onDelete ? (
+				<IconButton onClick={onDelete} sx={{ color: "primary.contrastText" }}>
+					<CancelIcon />
+				</IconButton>
+			) : null}
 		</StyledSpecializationBadge>
 	);
 };
@@ -140,7 +146,7 @@ const StyledSpecializationBadge = styled(Paper)`
 	align-items: center;
 	padding: 16px;
 	width: 100%;
-  max-width:268px;
+	max-width: 268px;
 	height: 80px;
 	margin: 16px 0;
 	background: ${({ theme }) => theme.palette.primary.light};

@@ -36,6 +36,7 @@ export const mapMonthsToNumbers = (month: string): number | undefined => {
 	if (month === "November") return 10;
 	if (month === "December") return 11;
 };
+
 // export const disableWeekday = (date: Date, doctorClinicAffiliations: DoctorClinicAffiliationsResponse[] | null) => {
 // 	const day = new Date(date).getDay();
 // 	const allClinicAffiliations = doctorClinicAffiliations

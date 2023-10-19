@@ -3,13 +3,16 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import Button from "components/Button/Button";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
+import { capitalizeFirstLetter } from "utils/strings/string";
 import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import ClinicAffiliationsSection from "../components/ClinicAffiliationsSection/ClinicAffiliationsSection";
 import DoctorInfoSection from "../components/DoctorInfoSection/DoctorInfoSection";
 import SpecializationSection from "../components/SpecializationSection/SpecializationSection";
 import { getSingleDoctor } from "../doctorsSlice";
 const SingleDoctor = () => {
+	const { t } = useTranslation(["doctors"]);
 	const dispatch = useAppDispatch();
 	const params = useParams();
 	const singleDoctorInfo = useAppSelector(state => state.doctors.singleDoctorData.data);
@@ -64,7 +67,7 @@ const SingleDoctor = () => {
 					gap: "16px",
 				}}>
 				<Typography variant="h4" textAlign="center">
-					General Info
+					{capitalizeFirstLetter(t("doctors:singleDoctorPage.generalInfo"))}
 				</Typography>
 				<DoctorInfoSection
 					name={singleDoctorInfo?.name || ""}
@@ -75,20 +78,20 @@ const SingleDoctor = () => {
 				<Divider />
 
 				<Typography variant="h4" textAlign="center">
-					Specializations
+					{capitalizeFirstLetter(t("doctors:singleDoctorPage.specializations"))}
 				</Typography>
 
 				<SpecializationSection />
 				<Divider />
 				<Typography variant="h4" textAlign="center">
-					Clinic Affiliations
+					{capitalizeFirstLetter(t("doctors:singleDoctorPage.clinicAffiliations"))}
 				</Typography>
 
 				<ClinicAffiliationsSection />
 				<Divider />
 				{/* @ts-ignore */}
 				<Button size="large" variant="text" component={Link} to={`/addAppointment/${params.doctorId}`}>
-					Make an appointment
+					{t("doctors:singleDoctorPage.makeAppointmentLabel")}
 				</Button>
 			</Box>
 		</DashboardLayoutWrapper>

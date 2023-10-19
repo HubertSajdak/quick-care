@@ -1,15 +1,16 @@
-import { useYupTranslation } from "../../../common/useYupTranslation";
-import { useAppDispatch } from "../../../app/hooks";
-import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import Button from "components/Button/Button";
+import TextFieldFormik from "components/TextFieldFormik/TextFieldFormik";
+import WorkingDayInfo from "components/WorkingDayInfo/WorkingDayInfo";
+import { FormikProvider, useFormik } from "formik";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
 import { useTranslation } from "react-i18next";
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import * as Yup from "yup";
-import { FormikProvider, useFormik } from "formik";
-import TextFieldFormik from "components/TextFieldFormik/TextFieldFormik";
-import Button from "components/Button/Button";
+import { useAppDispatch } from "../../../app/hooks";
+import { useYupTranslation } from "../../../common/useYupTranslation";
 import { createClinic } from "../clinicsSlice";
-import WorkingDayInfo from "components/WorkingDayInfo/WorkingDayInfo";
+import { capitalizeFirstLetter } from "utils/strings/string";
 
 const breadcrumbs: BreadcrumbsProps[] = [
 	{
@@ -17,7 +18,7 @@ const breadcrumbs: BreadcrumbsProps[] = [
 		to: "start",
 	},
 	{
-		label: "allClinics",
+		label: "addClinic",
 	},
 ];
 
@@ -97,7 +98,7 @@ const workingDayConfig = [
 const AddClinic = () => {
 	useYupTranslation();
 	const dispatch = useAppDispatch();
-	const { t } = useTranslation(["clinics"]);
+	const { t } = useTranslation(["clinics", "buttons"]);
 	const PHONE_NUM_REGEX = /^[0-9\- ]{8,14}$/;
 
 	const addClinicValidation = Yup.object({
@@ -191,7 +192,7 @@ const AddClinic = () => {
 							<form onSubmit={addClinicFormik.handleSubmit}>
 								<Grid container columnSpacing={2} rowSpacing={1.5}>
 									<Typography variant="h5" component="h2" p={"12px 16px"} display="block" width="100%">
-										General Info
+										{capitalizeFirstLetter(t("clinics:addClinicPage.generalInfo"))}
 									</Typography>
 									<Grid item xs={12} sm={12} md={12} minHeight="100px">
 										<TextFieldFormik id="clinicName" label={t("common:form.clinicName")} name="clinicName" />
@@ -205,7 +206,7 @@ const AddClinic = () => {
 										/>
 									</Grid>
 									<Typography variant="h5" component="h2" p={"12px 16px"} display="block" width="100%">
-										Address
+										{capitalizeFirstLetter(t("clinics:addClinicPage.address"))}
 									</Typography>
 									<Grid item xs={12} sm={6} md={4} minHeight="100px">
 										<TextFieldFormik id="street" label={t("common:form.street")} name="address.street" />
@@ -217,7 +218,7 @@ const AddClinic = () => {
 										<TextFieldFormik id="postalCode" label={t("common:form.postalCode")} name="address.postalCode" />
 									</Grid>
 									<Typography variant="h5" component="h2" p={"12px 16px"} display="block" width="100%">
-										Working Time
+										{capitalizeFirstLetter(t("clinics:addClinicPage.workingTime"))}
 									</Typography>
 									<Grid
 										item
