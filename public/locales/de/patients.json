@@ -6,7 +6,8 @@
 	"editPatientError": "Beim Abrufen der Daten ist ein Fehler aufgetreten.",
 	"table": {
 		"tableName": "patienten",
-		"tableDoctorName":"arzte",
+		"tableDoctorName": "arzte",
+		"tableAppointmentsLabel": "termine",
 		"rowsPerPage": "zeilen pro seite",
 		"searchInput": "suche...",
 		"selected": "ausgewählt",
@@ -16,7 +17,7 @@
 		"prevPageButton": "vorherige seite",
 		"nextPageButton": "nächste seite",
 		"customizeTable": "tabelle anpassen",
-		"refreshTable":"die tabelle aktualisieren"
+		"refreshTable": "die tabelle aktualisieren"
 	},
 	"tableHeadings": {
 		"name": "name",

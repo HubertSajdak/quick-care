@@ -1,31 +1,30 @@
-import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
-import Typography from "@mui/material/Typography";
-import { useTranslation } from "react-i18next";
-import { Avatar, Box, Card, CardContent, Grid } from "@mui/material";
-import Button from "components/Button/Button";
-import { useFormik, FormikProvider } from "formik";
-import * as Yup from "yup";
-import FileInputFormik from "components/FileInputFormik/FileInputFormik";
-import { useYupTranslation } from "common/useYupTranslation";
-import TextFieldFormik from "components/TextFieldFormik/TextFieldFormik";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import PasswordFieldFormik from "components/PasswordFieldFormik/PasswordFieldFormik";
-import DeleteIcon from "@mui/icons-material/Delete";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { Avatar, Box, Card, CardContent, Grid } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { useYupTranslation } from "common/useYupTranslation";
+import Button from "components/Button/Button";
+import FileInputFormik from "components/FileInputFormik/FileInputFormik";
+import PasswordFieldFormik from "components/PasswordFieldFormik/PasswordFieldFormik";
+import TextFieldFormik from "components/TextFieldFormik/TextFieldFormik";
+import { FormikProvider, useFormik } from "formik";
+import { useTranslation } from "react-i18next";
+import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
+import * as Yup from "yup";
 
-import { logoutUser } from "features/auth/authSlice";
-import Modal from "components/Modal/Modal";
-import useDocumentTitle from "common/useDocumentTitle";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useNavigate } from "react-router-dom";
+import useDocumentTitle from "common/useDocumentTitle";
 import { FileInputProps } from "components/FileInput/FileInput";
+import Modal from "components/Modal/Modal";
+import { logoutUser } from "features/auth/authSlice";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
-import { getTokenFromLocalStorage } from "utils/localStorage/localStorage";
 import { decodeToken } from "react-jwt";
+import { useNavigate } from "react-router-dom";
 import { DecodedToken } from "routes/PrivateRoute";
-import { updateUserData, updateUserPassword, updateUserPhoto } from "../userSlice";
-import { useEffect } from "react";
 import { BASE_URL } from "utils/axios/axios";
+import { getTokenFromLocalStorage } from "utils/localStorage/localStorage";
+import { ValidationRegex } from "utils/regex/regex";
+import { updateUserData, updateUserPassword, updateUserPhoto } from "../userSlice";
 
 const breadcrumbs: BreadcrumbsProps[] = [
 	{
@@ -61,31 +60,34 @@ const AccountManagement = () => {
 			.required()
 			.nullable(),
 	});
-	const PHONE_NUM_REGEX = /^[0-9\- ]{8,14}$/;
 
 	const updateUserValidation = Yup.object({
-		name: Yup.string().required(),
-		surname: Yup.string().required(),
+		name: Yup.string().required().min(2),
+		surname: Yup.string().required().min(2),
 		email: Yup.string().email().required(),
 		phoneNumber:
 			user.role !== "doctor"
-				? Yup.string().matches(PHONE_NUM_REGEX, t("common:form.phoneNumberError")).required()
+				? Yup.string().matches(ValidationRegex.PHONE_NUMBER, t("common:form.phoneNumberError")).required()
 				: Yup.string().nullable(),
 		address:
 			user.role !== "doctor"
 				? Yup.object({
 						street: Yup.string().required(),
 						city: Yup.string().required(),
-						postalCode: Yup.string().required(),
+						postalCode: Yup.string()
+							.matches(ValidationRegex.POSTAL_CODE, t("common:form.invalidPostalCode"))
+							.required()
+							.max(6),
 				  })
 				: Yup.object({}).nullable(),
 	});
 
 	const changePasswordValidation = Yup.object({
-		password: Yup.string().required().min(8, t("common:form.passwordMinError")),
+		password: Yup.string().matches(ValidationRegex.PHONE_NUMBER, t("common:form.phoneNumberError")).required(),
 		confirmPassword: Yup.string()
 			.required()
-			.oneOf([Yup.ref("password"), null], t("common:form.passwordMatchError")),
+			.matches(ValidationRegex.PASSWORD, t("common:form.invalidPassword"))
+			.oneOf([Yup.ref("password"), null]),
 	});
 
 	const uploadUserPhotoFormik = useFormik({

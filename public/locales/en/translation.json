@@ -57,5 +57,17 @@
 		"october": "october",
 		"november": "november",
 		"december": "december"
+	},
+	"infoCards": {
+		"allVisits": "all visits (month)",
+		"canceledVisits": "canceled visits (month)",
+		"completedVisits": "completed visits (month)",
+		"moreInfoLabel": "Click here to see more info"
+	},
+	"chart": {
+		"chartTitle": "Monthly visits",
+		"allVisits": "all visits",
+		"canceledVisits": "canceled visits",
+		"completedVisits": "completed visits"
 	}
 }

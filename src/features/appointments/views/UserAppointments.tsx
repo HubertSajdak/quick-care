@@ -16,12 +16,12 @@ const breadcrumbs: BreadcrumbsProps[] = [
 		to: "start",
 	},
 	{
-		label: "userClinicAffiliations",
+		label: "myAppointments",
 	},
 ];
 const UserAppointments = () => {
 	const dispatch = useAppDispatch();
-	const { t } = useTranslation(["patients", "modal"]);
+	const { t } = useTranslation(["patients", "modal", "translation"]);
 	const { userAppointments, totalItems, isLoading, isError, sortBy, sortDirection, currentPage, search, pageSize } =
 		useAppSelector(state => state.appointments);
 	useEffect(() => {
@@ -51,7 +51,7 @@ const UserAppointments = () => {
 	return (
 		<DashboardLayoutWrapper breadcrumbs={breadcrumbs}>
 			<Typography component="h1" variant="h4" textAlign="center" textTransform="capitalize" marginBottom={2}>
-				My Appointments
+				{t("translation:sidebar.myAppointments")}
 			</Typography>
 			<Box
 				width="100%"
@@ -92,7 +92,7 @@ const UserAppointments = () => {
 						sort={{ sortBy: sortBy, sortDirection: sortDirection }}
 						isSelectable={true}
 						isLoading={isLoading}
-						tableName={"Appointments"}
+						tableName={t("patients:table.tableAppointmentsLabel")}
 						innerTableTitle="More info"
 						data={userAppointments || []}
 						collapsible
@@ -126,7 +126,7 @@ const UserAppointments = () => {
 								title: t("tableHeadings.appointmentStatus"),
 								key: "appointmentStatus",
 								render: row => row.appointmentStatus,
-								sortable: true,
+								sortable: false,
 							},
 							{
 								title: t("tableHeadings.actions"),
