@@ -30,7 +30,9 @@
 		"accountManagement": "account management",
 		"specializations": "specializations",
 		"mySpecializations": "my specializations",
-		"clinicAffiliation": "office"
+		"clinicAffiliation": "office",
+		"allClinics": "all clinics",
+		"editClinicAffiliation": "edit clinic affiliations"
 	},
 	"welcomePage": {
 		"welcome": "welcome"

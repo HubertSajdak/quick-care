@@ -7,10 +7,12 @@ import { getDoctorAppointments } from "features/appointments/appointmentsSlice";
 import { getSingleDoctorClinicAffiliations } from "features/clinicAffiliations/clinicAffiliationsSlice";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { AppointmentResponse } from "types/api-types";
 import { BASE_URL } from "utils/axios/axios";
 import { mapDayNamesToNumbers } from "utils/date/date";
+import { capitalizeFirstLetter } from "utils/strings/string";
 export interface DoctorInfoSectionProps {
 	name: string;
 	surname: string;
@@ -20,7 +22,7 @@ export interface DoctorInfoSectionProps {
 const DoctorInfoSection = ({ name, surname, email, photo }: DoctorInfoSectionProps) => {
 	const dispatch = useAppDispatch();
 	const params = useParams();
-
+	const { t } = useTranslation(["doctors"]);
 	useEffect(() => {
 		if (!params.doctorId) return;
 		dispatch(getSingleDoctorClinicAffiliations(params.doctorId));
@@ -129,7 +131,7 @@ const DoctorInfoSection = ({ name, surname, email, photo }: DoctorInfoSectionPro
 			</Box>
 			<Box display="flex" flexDirection="column">
 				<Typography textAlign="center" variant="body1" color="primary.light" sx={{ fontWeight: "bold" }}>
-					Check doctor's availability
+					{capitalizeFirstLetter(t("doctors:singleDoctorPage.doctorsAvailabilityLabel"))}
 				</Typography>
 				<Calendar
 					filterTime={filterTime}

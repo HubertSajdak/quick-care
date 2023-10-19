@@ -125,7 +125,7 @@ const AllDoctors = () => {
 			</Typography>
 			<Grid container xs={12}>
 				<Grid item xs={12} display="flex" justifyContent="center">
-					<Box sx={{ width: { xs: "260px", sm: "100%" }, maxWidth: "1400px" }}>
+					<Box sx={{ overflowX: "auto", width: { xs: "260px", sm: "500px", md: "100%" }, maxWidth: "1400px" }}>
 						{isError ? (
 							<NotFoundContent returnPath="/" />
 						) : (

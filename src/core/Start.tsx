@@ -227,7 +227,7 @@ const Welcome = () => {
 				</Grid>
 				<Grid item xs={12} sm={6} md={4} lg={3}>
 					<InfoCard
-						title={capitalizeFirstLetter(t("translation:infoCards.allVisits"))}
+						title={capitalizeFirstLetter(t("translation:infoCards.canceledVisits"))}
 						number={calculatedMonthlyCanceledVisits?.length || 0}
 						icon={<CancelIcon sx={{ color: "warning.light", fontSize: "60px" }} />}
 						description={t("translation:infoCards.moreInfoLabel")}
@@ -235,7 +235,7 @@ const Welcome = () => {
 				</Grid>
 				<Grid item xs={12} sm={6} md={4} lg={3}>
 					<InfoCard
-						title={capitalizeFirstLetter(t("translation:infoCards.allVisits"))}
+						title={capitalizeFirstLetter(t("translation:infoCards.completedVisits"))}
 						number={calculatedMonthlyCompletedVisits?.length || 0}
 						description={t("translation:infoCards.moreInfoLabel")}
 						icon={<LibraryAddCheckIcon sx={{ color: "success.main", fontSize: "60px" }} />}

@@ -1,8 +1,6 @@
-import RefreshIcon from "@mui/icons-material/Refresh";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Grid, TextField, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import useDocumentTitle from "common/useDocumentTitle";
-import Button from "components/Button/Button";
 import NotFoundContent from "components/NotFoundContent/NotFoundContent";
 import Table from "components/Table/Table";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
@@ -30,7 +28,7 @@ const AllPatients = () => {
 		state => state.patients.allPatientsData
 	);
 
-	const fetchDoctorsData = useCallback(async () => {
+	const fetchPatientsData = useCallback(async () => {
 		await dispatch(getAllPatients());
 	}, [dispatch]);
 
@@ -59,132 +57,121 @@ const AllPatients = () => {
 			<Typography component="h1" variant="h4" textAlign="center" textTransform={"capitalize"} marginBottom={2}>
 				{t("allPatients")}
 			</Typography>
-			<Box
-				width="100%"
-				boxShadow="3"
-				padding="1rem"
-				maxWidth={{ lg: "lg", md: "850px", sm: "530px", xs: "300px" }}
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					alignitems: "center",
-					backgroundColor: "white",
-					borderTop: 5,
-					borderColor: "primary.main",
-					borderRadius: "8px 8px 0 0",
-					margin: "0 auto",
-				}}>
-				{isError ? (
-					<NotFoundContent returnPath="/" />
-				) : (
-					<>
-						<Table
-							filter={
-								<div style={{ marginRight: "1rem" }}>
-									<TextField
-										placeholder={t("patients:table.searchInput")}
-										defaultValue={search || ""}
-										onChange={e => debouncedOnChangeSearch(e.target.value)}
-										size="small"
-									/>
-								</div>
-							}
-							onChangePage={changePageHandler}
-							onChangeSort={changeSortHandler}
-							onChangeRowsPerPage={changeRowsPerPageHandler}
-							pagination={{
-								currentPage: currentPage,
-								pageSize: pageSize,
-								totalItems: totalItems,
-							}}
-							sort={{ sortBy: sortBy, sortDirection: sortDirection }}
-							isSelectable={true}
-							isLoading={isLoading}
-							tableName={t("table.tableName")}
-							data={data || []}
-							columns={[
-								{
-									title: t("tableHeadings.photo"),
-									key: "photo",
-									render: row => row.photo,
-									sortable: false,
-								},
-								{
-									title: t("tableHeadings.name"),
-									key: "name",
-									render: row => row.name,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.surname"),
-									key: "surname",
-									render: row => row.surname,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.email"),
-									key: "email",
-									render: row => row.email,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.street"),
-									key: "address.street",
-									render: row => row.address.street,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.city"),
-									key: "address.city",
-									render: row => row.address.city,
-									sortable: true,
-								},
-								{
-									title: t("tableHeadings.postalCode"),
-									key: "address.postalCode",
-									render: row => row.address.postalCode,
-									sortable: true,
-								},
+			<Grid container xs={12}>
+				<Grid item xs={12} display="flex" justifyContent="center">
+					<Box
+						position="relative"
+						sx={{ overflowX: "auto", width: { xs: "260px", sm: "500px", md: "100%" }, maxWidth: "1400px" }}>
+						{isError ? (
+							<NotFoundContent returnPath="/" />
+						) : (
+							<>
+								<Table
+									filter={
+										<div style={{ marginRight: "1rem" }}>
+											<TextField
+												placeholder={t("patients:table.searchInput")}
+												defaultValue={search || ""}
+												onChange={e => debouncedOnChangeSearch(e.target.value)}
+												size="small"
+												sx={{ width: 200 }}
+												type="search"
+											/>
+										</div>
+									}
+									onChangePage={changePageHandler}
+									onChangeSort={changeSortHandler}
+									onChangeRowsPerPage={changeRowsPerPageHandler}
+									pagination={{
+										currentPage: currentPage,
+										pageSize: pageSize,
+										totalItems: totalItems,
+									}}
+									sort={{ sortBy: sortBy, sortDirection: sortDirection }}
+									isSelectable={true}
+									isLoading={isLoading}
+									tableName={t("table.tableName")}
+									data={data || []}
+									refreshTableContent={fetchPatientsData}
+									columns={[
+										{
+											title: t("tableHeadings.photo"),
+											key: "photo",
+											render: row => row.photo,
+											sortable: false,
+										},
+										{
+											title: t("tableHeadings.name"),
+											key: "name",
+											render: row => row.name,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.surname"),
+											key: "surname",
+											render: row => row.surname,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.email"),
+											key: "email",
+											render: row => row.email,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.street"),
+											key: "address.street",
+											render: row => row.address.street,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.city"),
+											key: "address.city",
+											render: row => row.address.city,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.postalCode"),
+											key: "address.postalCode",
+											render: row => row.address.postalCode,
+											sortable: true,
+										},
 
-								{
-									title: t("tableHeadings.phoneNumber"),
-									key: "phoneNumber",
-									render: row => row.phoneNumber,
-									sortable: true,
-								},
+										{
+											title: t("tableHeadings.phoneNumber"),
+											key: "phoneNumber",
+											render: row => row.phoneNumber,
+											sortable: true,
+										},
 
-								// {
-								// 	title: t("tableHeadings.actions"),
-								// 	key: "actions",
-								// 	render: row => (
-								// 		<Box display="flex">
-								// 			<Modal
-								// 				title={t("modal:deletePatient.title")}
-								// 				text={t("modal:deletePatient.text")}
-								// 				openModalBtnColor="warning"
-								// 				openModalBtnText={<DeleteIcon />}
-								// 				isOpenModalIconBtn={true}
-								// 				acceptBtnColor="error"
-								// 				rejectBtnVariant="contained"
-								// 				onAsyncClick={function (): Promise<void> {
-								// 					throw new Error("Function not implemented.");
-								// 				}}
-								// 			/>
-								// 		</Box>
-								// 	),
-								// 	sortable: false,
-								// },
-							]}
-						/>
-
-						<div style={{ display: "flex" }}>
-							<Button startIcon={<RefreshIcon />} onAsyncClick={fetchDoctorsData} sx={{ margin: "0 0 0 16px" }}>
-								{t("buttons:refresh")}
-							</Button>
-						</div>
-					</>
-				)}
-			</Box>
+										// {
+										// 	title: t("tableHeadings.actions"),
+										// 	key: "actions",
+										// 	render: row => (
+										// 		<Box display="flex">
+										// 			<Modal
+										// 				title={t("modal:deletePatient.title")}
+										// 				text={t("modal:deletePatient.text")}
+										// 				openModalBtnColor="warning"
+										// 				openModalBtnText={<DeleteIcon />}
+										// 				isOpenModalIconBtn={true}
+										// 				acceptBtnColor="error"
+										// 				rejectBtnVariant="contained"
+										// 				onAsyncClick={function (): Promise<void> {
+										// 					throw new Error("Function not implemented.");
+										// 				}}
+										// 			/>
+										// 		</Box>
+										// 	),
+										// 	sortable: false,
+										// },
+									]}
+								/>
+							</>
+						)}
+					</Box>
+				</Grid>
+			</Grid>
 		</DashboardLayoutWrapper>
 	);
 };

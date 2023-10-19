@@ -1,5 +1,5 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Avatar, Box, Chip, Divider, IconButton, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useYupTranslation } from "common/useYupTranslation";
 import SelectFormik from "components/SelectFormik/SelectFormik";
@@ -9,9 +9,11 @@ import { FormikProvider, useFormik } from "formik";
 import { BreadcrumbsProps } from "layouts/DashboardLayout/components/Breadcrumbs/Breadcrumbs";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { BASE_URL } from "utils/axios/axios";
 import DashboardLayoutWrapper from "wrappers/DashboardLayoutWrapper";
 import * as Yup from "yup";
+import SpecializationBadge from "../components/SpecializationBadge/SpecializationBadge";
 import { addDoctorSpecialization, deleteDoctorSpecialization } from "../doctorsSlice";
 
 const breadcrumbs: BreadcrumbsProps[] = [
@@ -115,37 +117,46 @@ const DoctorSpecializations = () => {
 					/>
 					<Typography variant="h4" mt={2}>{`${user.name} ${user.surname}`}</Typography>
 				</Box>
-				<Divider variant="middle" flexItem={true} />
-				<Box display="flex" flexWrap="wrap" gap="16px">
+				<Box
+					width="100%"
+					display="flex"
+					padding={{ xs: 0, md: 3 }}
+					flexWrap="wrap"
+					justifyContent={{ xs: "center", md: "space-around", lg: "normal" }}
+					gap={"8px"}>
 					{doctorSpecializations
 						? doctorSpecializations.map(specialization => {
 								return (
-									<Chip
-										key={specialization._id}
-										label={t(`specializations:specializationKey.${specialization.specializationKey}`)}
-										sx={{
-											minWidth: "200px",
-											height: "50px",
-											fontSize: "30px",
-											textTransform: "capitalize",
-											backgroundColor: "primary.main",
-											color: "primary.contrastText",
-										}}
+									// <Chip
+									// 	key={specialization._id}
+									// 	label={t(`specializations:specializationKey.${specialization.specializationKey}`)}
+									// 	sx={{
+									// 		minWidth: "200px",
+									// 		height: "50px",
+									// 		fontSize: "30px",
+									// 		textTransform: "capitalize",
+									// 		backgroundColor: "primary.main",
+									// 		color: "primary.contrastText",
+									// 	}}
+									// 	onDelete={() => handleRemoveDoctorSpecialization(specialization._id)}
+									// 	color="primary"
+									// 	variant="outlined"
+									// />
+									<SpecializationBadge
+										specializationKey={specialization.specializationKey || ""}
 										onDelete={() => handleRemoveDoctorSpecialization(specialization._id)}
-										color="primary"
-										variant="outlined"
 									/>
 								);
 						  })
 						: null}
 					<FormikProvider value={addDoctorSpecializationFormik}>
-						<form onSubmit={addDoctorSpecializationFormik.handleSubmit}>
+						<StyledForm onSubmit={addDoctorSpecializationFormik.handleSubmit}>
 							<SelectFormik
 								id="specializationKey"
 								name="specializationId"
 								optionsList={optionsList ? optionsList : []}
 								label={t("specializations:specializationLabel")}
-								sx={{ borderRadius: "16px", height: "50px", minWidth: "180px" }}
+								sx={{ borderRadius: "16px", height: "55px", minWidth: "180px" }}
 								onAddButton={
 									isAcceptBtn ? (
 										<IconButton type="submit" size="large" color="primary">
@@ -154,7 +165,7 @@ const DoctorSpecializations = () => {
 									) : null
 								}
 							/>
-						</form>
+						</StyledForm>
 					</FormikProvider>
 				</Box>
 			</Box>
@@ -162,3 +173,11 @@ const DoctorSpecializations = () => {
 	);
 };
 export default DoctorSpecializations;
+
+const StyledForm = styled.form`
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 268px;
+	margin: 16px 0;
+`;

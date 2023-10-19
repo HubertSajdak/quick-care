@@ -30,7 +30,9 @@
 		"accountManagement": "kontoverwaltung",
 		"specializations": "spezialisierungen",
 		"mySpecializations": "meine spezialisierungen",
-		"clinicAffiliation": "büroe"
+		"clinicAffiliation": "büroe",
+		"allClinics": "alle kliniken",
+		"editClinicAffiliation": "büros bearbeiten"
 	},
 	"welcomePage": {
 		"welcome": "willkommen"

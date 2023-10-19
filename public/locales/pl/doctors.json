@@ -1,5 +1,20 @@
 {
 	"doctorSpecializations": {
 		"mySpecializations": "moje specjalizacje"
+	},
+	"singleDoctorPage": {
+		"generalInfo": "informacje ogólne",
+		"doctorsAvailabilityLabel": "sprawdź dostępność lekarza",
+		"specializations": "specjalizacje",
+		"clinicAffiliations": "biura",
+		"makeAppointmentLabel": "umów wizytę"
+	},
+	"clinicInfoCard": {
+		"address": "adres",
+		"phoneNumber": "telefon",
+		"city": "miasto",
+		"street": "ulica",
+		"postalCode": "kod pocztowy",
+		"workingTime": "czas pracy"
 	}
 }

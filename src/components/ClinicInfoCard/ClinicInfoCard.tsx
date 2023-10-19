@@ -3,8 +3,10 @@ import CallIcon from "@mui/icons-material/Call";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import { Box, Card, CardContent, CardMedia, CardProps, Typography } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ClinicResponse } from "types/api-types";
 import { BASE_URL } from "utils/axios/axios";
+import { capitalizeFirstLetter } from "utils/strings/string";
 export interface ClinicInfoCardProps extends Omit<ClinicResponse, "_id">, CardProps {
 	renderButton: React.ReactNode;
 }
@@ -17,6 +19,7 @@ const ClinicInfoCard = ({
 	renderButton,
 	...CardProps
 }: ClinicInfoCardProps) => {
+	const { t } = useTranslation(["doctors", "clinics"]);
 	return (
 		<Card {...CardProps}>
 			{photo ? (
@@ -29,22 +32,22 @@ const ClinicInfoCard = ({
 				<Box display="flex" alignItems="center" gap={1}>
 					<BusinessIcon sx={{ color: "primary.main" }} />
 					<Typography variant="h6" component="p" color="primary.main">
-						Address
+						{capitalizeFirstLetter(t("doctors:clinicInfoCard.address"))}
 					</Typography>
 				</Box>
 				<Typography variant="body2" color="text.secondary">
-					Street: {address.street}
+					{capitalizeFirstLetter(t("doctors:clinicInfoCard.street"))}: {address.street}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					City: {address.city}
+					{capitalizeFirstLetter(t("doctors:clinicInfoCard.city"))}: {address.city}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					Postal Code: {address.postalCode}
+					{capitalizeFirstLetter(t("doctors:clinicInfoCard.postalCode"))}: {address.postalCode}
 				</Typography>
 				<Box display="flex" alignItems="center" gap={1}>
 					<CallIcon sx={{ color: "primary.main" }} />
 					<Typography variant="h6" component="p" color="primary.main">
-						Phone Number
+						{capitalizeFirstLetter(t("doctors:clinicInfoCard.phoneNumber"))}
 					</Typography>
 				</Box>
 				<Typography variant="body2" color="text.secondary">
@@ -54,14 +57,14 @@ const ClinicInfoCard = ({
 					<WatchLaterIcon sx={{ color: "primary.main" }} />
 
 					<Typography variant="h6" component="p" color="primary.main">
-						Working Time
+						{capitalizeFirstLetter(t("doctors:clinicInfoCard.workingTime"))}
 					</Typography>
 				</Box>
 				{workingTime.map(day => {
 					return (
 						<Box display="flex" key={day.weekDay}>
 							<Typography variant="subtitle2" color="text.secondary">
-								{day.weekDay} {day.startTime} - {day.stopTime}
+								{capitalizeFirstLetter(t(`clinics:weekDay.${day.weekDay}`))} {day.startTime} - {day.stopTime}
 							</Typography>
 						</Box>
 					);
