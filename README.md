@@ -9,3 +9,6 @@ Current features:
 - displaying patients and doctors in the table with implemented sorting and filtering mechanism,
 - delete account option. 
 Forms and validation were made using Formik and Yup, in addition the application has three language versions (English, Polish, German) by using the i18n library. The application state is managed by Redux-Toolkit.
+
+
+[Live](https://quick-care.vercel.app)
