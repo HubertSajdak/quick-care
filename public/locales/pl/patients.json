@@ -4,10 +4,10 @@
 	"patientInfo": "informacje pacjenta",
 	"editPatient": "edycja pacjenta",
 	"editPatientError": "Wystąpił błąd podczas pobierania danych.",
-
 	"table": {
 		"tableName": "pacjenci",
 		"tableDoctorName": "lekarze",
+		"tableAppointmentsLabel": "wizyty",
 		"rowsPerPage": "wierszy na stronę",
 		"searchInput": "wyszukaj...",
 		"selected": "wybrano",
@@ -17,9 +17,8 @@
 		"prevPageButton": "poprzednia strona",
 		"nextPageButton": "następna strona",
 		"customizeTable": "modyfikuj tabelę",
-		"refreshTable":"odśwież tabelę"
+		"refreshTable": "odśwież tabelę"
 	},
-
 	"tableHeadings": {
 		"name": "imię",
 		"surname": "nazwisko",

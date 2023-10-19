@@ -111,8 +111,6 @@ const AllDoctors = () => {
 	};
 
 	useEffect(() => {
-		console.log(selectedSpecOptions);
-
 		if (selectedSpecOptions) {
 			const specsIdArray: string[] = [];
 			selectedSpecOptions.forEach(option => specsIdArray.push(`${option.value}`));
@@ -126,115 +124,117 @@ const AllDoctors = () => {
 				{t("translation:sidebar.allDoctors")}
 			</Typography>
 			<Grid container xs={12}>
-				<Grid item xs={12}>
-					{isError ? (
-						<NotFoundContent returnPath="/" />
-					) : (
-						<>
-							<Table
-								filter={
-									<Box display="flex" flexDirection={{ xs: "column", sm: "column", md: "row" }}>
-										<div style={{ margin: "1rem" }}>
-											<CheckboxSelect
-												size="small"
-												optionsList={specializationOptions}
-												checkedList={selectedSpecOptions}
-												value={selectedSpecOptions}
-												onSelected={selectHandler}
-												renderValue={() => selectedSpecOptions.map(el => el.label).join(", ")}
-												sx={{ width: 200 }}
-												label="specializations"
-											/>
-										</div>
-										<div style={{ margin: "1rem" }}>
-											<TextField
-												placeholder={t("patients:table.searchInput")}
-												defaultValue={search || ""}
-												onChange={e => debouncedOnChangeSearch(e.target.value)}
-												size="small"
-												sx={{ width: 200 }}
-												type="search"
-											/>
-										</div>
-									</Box>
-								}
-								refreshTableContent={fetchDoctorsData}
-								onChangePage={changePageHandler}
-								onChangeSort={changeSortHandler}
-								onChangeRowsPerPage={changeRowsPerPageHandler}
-								pagination={{
-									currentPage: currentPage,
-									pageSize: pageSize,
-									totalItems: totalItems,
-								}}
-								sort={{ sortBy: sortBy, sortDirection: sortDirection }}
-								isSelectable={true}
-								isLoading={isLoading}
-								tableName={t("table.tableDoctorName")}
-								innerTableTitle="More info"
-								data={data || []}
-								collapsible
-								columns={[
-									{
-										title: t("tableHeadings.photo"),
-										key: "photo",
-										render: row => row.photo,
-										sortable: false,
-									},
-									{
-										title: t("tableHeadings.name"),
-										key: "name",
-										render: row => row.name,
-										sortable: true,
-									},
-									{
-										title: t("tableHeadings.surname"),
-										key: "surname",
-										render: row => row.surname,
-										sortable: true,
-									},
-									{
-										title: t("tableHeadings.email"),
-										key: "email",
-										render: row => row.email,
-										sortable: true,
-									},
+				<Grid item xs={12} display="flex" justifyContent="center">
+					<Box sx={{ width: { xs: "260px", sm: "100%" }, maxWidth: "1400px" }}>
+						{isError ? (
+							<NotFoundContent returnPath="/" />
+						) : (
+							<>
+								<Table
+									filter={
+										<Box display="flex" flexDirection={{ xs: "column", sm: "column", md: "row" }}>
+											<div style={{ margin: "1rem" }}>
+												<CheckboxSelect
+													size="small"
+													optionsList={specializationOptions}
+													checkedList={selectedSpecOptions}
+													value={selectedSpecOptions}
+													onSelected={selectHandler}
+													renderValue={() => selectedSpecOptions.map(el => el.label).join(", ")}
+													sx={{ width: 200 }}
+													label="specializations"
+												/>
+											</div>
+											<div style={{ margin: "1rem" }}>
+												<TextField
+													placeholder={t("patients:table.searchInput")}
+													defaultValue={search || ""}
+													onChange={e => debouncedOnChangeSearch(e.target.value)}
+													size="small"
+													sx={{ width: 200 }}
+													type="search"
+												/>
+											</div>
+										</Box>
+									}
+									refreshTableContent={fetchDoctorsData}
+									onChangePage={changePageHandler}
+									onChangeSort={changeSortHandler}
+									onChangeRowsPerPage={changeRowsPerPageHandler}
+									pagination={{
+										currentPage: currentPage,
+										pageSize: pageSize,
+										totalItems: totalItems,
+									}}
+									sort={{ sortBy: sortBy, sortDirection: sortDirection }}
+									isSelectable={true}
+									isLoading={isLoading}
+									tableName={t("table.tableDoctorName")}
+									innerTableTitle="More info"
+									data={data || []}
+									collapsible
+									columns={[
+										{
+											title: t("tableHeadings.photo"),
+											key: "photo",
+											render: row => row.photo,
+											sortable: false,
+										},
+										{
+											title: t("tableHeadings.name"),
+											key: "name",
+											render: row => row.name,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.surname"),
+											key: "surname",
+											render: row => row.surname,
+											sortable: true,
+										},
+										{
+											title: t("tableHeadings.email"),
+											key: "email",
+											render: row => row.email,
+											sortable: true,
+										},
 
-									{
-										title: t("tableHeadings.actions"),
-										key: "actions",
-										render: row => (
-											<Box display="flex">
-												<IconButton component={Link} to={`/addAppointment/${row._id}`}>
-													<BookIcon color="info" />
-												</IconButton>
-												<IconButton component={Link} to={`/allDoctors/singleDoctor/${row._id}`}>
-													<PersonIcon color="info" />
-												</IconButton>
-											</Box>
-										),
-										sortable: false,
-									},
-								]}
-								innerColumns={[
-									{
-										title: "specializations",
-										key: "specialization",
-										render: row =>
-											row.DoctorSpecialization?.map((spec, idx, arr) => {
-												if (idx + 1 === arr.length) {
-													return `${spec.Specialization?.specializationKey}`;
-												}
-												return `${spec.Specialization?.specializationKey}, `;
-											}),
-										sortable: false,
-									},
-								]}
-							/>
+										{
+											title: t("tableHeadings.actions"),
+											key: "actions",
+											render: row => (
+												<Box display="flex">
+													<IconButton component={Link} to={`/addAppointment/${row._id}`}>
+														<BookIcon color="info" />
+													</IconButton>
+													<IconButton component={Link} to={`/allDoctors/singleDoctor/${row._id}`}>
+														<PersonIcon color="info" />
+													</IconButton>
+												</Box>
+											),
+											sortable: false,
+										},
+									]}
+									innerColumns={[
+										{
+											title: "specializations",
+											key: "specialization",
+											render: row =>
+												row.DoctorSpecialization?.map((spec, idx, arr) => {
+													if (idx + 1 === arr.length) {
+														return `${spec.Specialization?.specializationKey}`;
+													}
+													return `${spec.Specialization?.specializationKey}, `;
+												}),
+											sortable: false,
+										},
+									]}
+								/>
 
-							<div style={{ display: "flex" }}>{/* @ts-ignore */}</div>
-						</>
-					)}
+								<div style={{ display: "flex" }}>{/* @ts-ignore */}</div>
+							</>
+						)}
+					</Box>
 				</Grid>
 			</Grid>
 		</DashboardLayoutWrapper>

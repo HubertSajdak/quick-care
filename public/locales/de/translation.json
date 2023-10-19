@@ -57,5 +57,17 @@
 		"october": "oktober",
 		"november": "november",
 		"december": "dezember"
+	},
+	"infoCards": {
+		"allVisits": "alle termine (monat)",
+		"canceledVisits": "abgesagte termine (monat)",
+		"completedVisits": "abgeschlossene besuche (monat)",
+		"moreInfoLabel": "klicken sie hier für weitere informationen"
+	},
+	"chart": {
+		"chartTitle": "Monatliche besuche",
+		"allVisits": "alle termine",
+		"canceledVisits": "abgesagte termine",
+		"completedVisits": "abgeschlossene besuche"
 	}
 }

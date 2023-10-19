@@ -44,18 +44,30 @@
 		"changePhoneNumber": "zmień numer telefonu",
 		"changeAddress": "zmień adres"
 	},
-	"months":{
-		"january":"styczeń",
-		"february":"luty",
-		"march":"marzec",
-		"april":"kwiecień",
-		"may":"maj",
-		"june":"czerwiec",
-		"july":"lipiec",
-		"august":"sierpień",
-		"september":"wrzesień",
-		"october":"październik",
-		"november":"listopad",
-		"december":"grudzień"
+	"months": {
+		"january": "styczeń",
+		"february": "luty",
+		"march": "marzec",
+		"april": "kwiecień",
+		"may": "maj",
+		"june": "czerwiec",
+		"july": "lipiec",
+		"august": "sierpień",
+		"september": "wrzesień",
+		"october": "październik",
+		"november": "listopad",
+		"december": "grudzień"
+	},
+	"infoCards": {
+		"allVisits": "wszystkie wizyty (miesiąc)",
+		"canceledVisits": "odwołane wizyty (miesiąc)",
+		"completedVisits": "zakończone wizyty (miesiąc)",
+		"moreInfoLabel": "Kliknij tutaj aby zobaczyć więcej"
+	},
+	"chart": {
+		"chartTitle": "Wizyty miesięczne",
+		"allVisits": "wszystkie wizyty",
+		"canceledVisits": "odwołane wizyty",
+		"completedVisits": "zakończone wizyty"
 	}
 }

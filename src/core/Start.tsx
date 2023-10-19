@@ -219,25 +219,25 @@ const Welcome = () => {
 			<Grid container xs={12} rowSpacing={4.5} columnSpacing={2.75}>
 				<Grid item xs={12} sm={6} md={4} lg={3}>
 					<InfoCard
-						title={"All visits (month)"}
+						title={capitalizeFirstLetter(t("translation:infoCards.allVisits"))}
 						number={calculatedMonthlyVisits?.length || 0}
 						icon={<LocalHospitalIcon sx={{ color: "primary.main", fontSize: "60px" }} />}
-						description="Click here to see more info"
+						description={t("translation:infoCards.moreInfoLabel")}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6} md={4} lg={3}>
 					<InfoCard
-						title={"Canceled visits (month)"}
+						title={capitalizeFirstLetter(t("translation:infoCards.allVisits"))}
 						number={calculatedMonthlyCanceledVisits?.length || 0}
 						icon={<CancelIcon sx={{ color: "warning.light", fontSize: "60px" }} />}
-						description="Click here to see more info"
+						description={t("translation:infoCards.moreInfoLabel")}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6} md={4} lg={3}>
 					<InfoCard
-						title={"Completed visits (month)"}
+						title={capitalizeFirstLetter(t("translation:infoCards.allVisits"))}
 						number={calculatedMonthlyCompletedVisits?.length || 0}
-						description="Click here to see more info"
+						description={t("translation:infoCards.moreInfoLabel")}
 						icon={<LibraryAddCheckIcon sx={{ color: "success.main", fontSize: "60px" }} />}
 					/>
 				</Grid>
@@ -248,23 +248,23 @@ const Welcome = () => {
 						<ColumnChart
 							series={[
 								{
-									name: "All visits",
+									name: t("translation:chart.allVisits"),
 									data: calculateYearlyNumberOfVisits(),
 									color: theme.palette.primary.main,
 								},
 								{
-									name: "Canceled visits",
+									name: t("translation:chart.canceledVisits"),
 									data: calculateYearlyNumberOfCanceledVisits(),
 									color: theme.palette.warning.main,
 								},
 								{
-									name: "Completed visits",
+									name: t("translation:chart.completedVisits"),
 									data: calculateYearlyNumberOfCompletedVisits(),
 									color: theme.palette.success.main,
 								},
 							]}
 							options={columnChartOptions}
-							title="Monthly Visits"
+							title={t("translation:chart.chartTitle")}
 						/>
 					</Stack>
 				</Grid>
